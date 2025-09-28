@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'Font';
+    src: url(https://cdn.jsdelivr.net/gh/Akella497/Fonts@main/Vetrino.otf);
+}
+
+body {
+    background-image: url(https://i.ibb.co/GvVpVDVR/374320-screenshots-20170304214229-1.png);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    font-family:'Trebuchet MS';
+}
+
+.portrait {
+    width: 350px;
+    border: black 2px solid;
+}
+
+.start { 
+    display: flex;
+    flex-direction: row;
+}
+
+.info {
+    flex: 1;
+    font-size: 14pt;
+    color: #c2c2c2;
+    justify-content: center;
+    align-items: center;    
+    text-align: justify;      
+}
+h1 { text-align: center; }
+.info .stats { text-align: center; background-color: rgba(0,0,0,0.8); padding: 0.2rem; border-radius: 12px; }
+.info.right { margin-right: 2rem; }
+
+/* Полоса прокрутки (весь контейнер) */
+  ::-webkit-scrollbar {
+    width: 12px;            /* ширина вертикального скролла */
+    height: 12px;           /* высота горизонтального скролла */
+  }
+
+  /* фон трека (дорожка) */
+  ::-webkit-scrollbar-track {
+    background: #0f0f0f;    /* чуть светлее фона страницы */
+  }
+
+  /* сам ползунок (thumb) */
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #111111, #000000); /* градиент для глубины */
+    border-radius: 10px;
+    border: 2px solid #c2c2c2; /* чтобы создать "отступ" между треком и ползунком */
+    min-height: 30px;
+  }
+
+
+  /* при активном перетаскивании */
+  ::-webkit-scrollbar-thumb:active {
+    background: #000000;
+  }
+
+  /* маленькая тень для контраста (необязательно) */
+  ::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+  }
+
+
+
+
