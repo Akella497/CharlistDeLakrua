@@ -64,6 +64,32 @@ h1 { text-align: center; }
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
   }
 
+@media (max-width: 800px) {
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+
+    .start {
+        flex-direction: column; /* блоки в колонку */
+        align-items: center;
+    }
+
+    .portrait {
+        width: 80%;  /* резиновая ширина */
+        max-width: 280px;
+    }
+
+    .info {
+        font-size: 12pt; /* чуть меньше шрифт */
+        margin: 0 1rem;
+        text-align: left;
+    }
+
+    .info.right {
+        margin-right: 0;
+    }
+}
 
 
 
