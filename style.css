@@ -11,11 +11,6 @@ body {
     background-repeat: no-repeat;
     font-family:'Trebuchet MS';
 }
-
-.stats {
-    text-allign: justify !important;
-}
-
 .portrait {
     width: 350px;
     border: black 2px solid;
@@ -37,6 +32,9 @@ body {
 h1 { text-align: center; }
 .info .stats { text-align: center; background-color: rgba(0,0,0,0.8); padding: 0.2rem; border-radius: 12px; }
 .info.right { margin-right: 2rem; }
+.stats {
+    text-allign: justify !important;
+}
 
 /* Полоса прокрутки (весь контейнер) */
   ::-webkit-scrollbar {
@@ -94,6 +92,7 @@ h1 { text-align: center; }
         margin-right: 0;
     }
 }
+
 
 
 
