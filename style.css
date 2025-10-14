@@ -12,6 +12,10 @@ body {
     font-family:'Trebuchet MS';
 }
 
+.stats {
+    text-allign: justify;
+}
+
 .portrait {
     width: 350px;
     border: black 2px solid;
@@ -90,6 +94,7 @@ h1 { text-align: center; }
         margin-right: 0;
     }
 }
+
 
 
 
