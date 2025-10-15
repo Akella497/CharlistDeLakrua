@@ -30,8 +30,11 @@ body {
     text-align: justify;      
 }
 h1 { text-align: center; }
-.info .stats { text-align: center; background-color: rgba(0,0,0,0.8); padding: 0.2rem; border-radius: 12px; }
+.info .stats { background-color: rgba(0,0,0,0.8); padding: 0.2rem; border-radius: 12px; }
 .info.right { margin-right: 2rem; }
+.info { 
+    text-align: center;
+}
 .stats {
     text-allign: justify !important;
 }
@@ -92,6 +95,7 @@ h1 { text-align: center; }
         margin-right: 0;
     }
 }
+
 
 
 
