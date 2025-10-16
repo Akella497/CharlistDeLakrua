@@ -36,7 +36,7 @@ h1 { text-align: center; }
     text-align: center;
 }
 .stats {
-    text-allign: justify !important;
+    text-align: justify !important;
 }
 
 /* Полоса прокрутки (весь контейнер) */
@@ -95,6 +95,7 @@ h1 { text-align: center; }
         margin-right: 0;
     }
 }
+
 
 
 
