@@ -11,6 +11,7 @@ body {
     background-repeat: no-repeat;
     font-family:'Trebuchet MS';
 }
+
 .portrait {
     width: 350px;
     border: black 2px solid;
@@ -29,12 +30,23 @@ body {
     align-items: center;    
     text-align: justify;      
 }
+
 h1 { text-align: center; }
-.info .stats { background-color: rgba(0,0,0,0.8); padding: 1.2rem; border-radius: 12px; }
-.info.right { margin-right: 2rem; }
+
+.info .stats { 
+    background-color: rgba(0,0,0,0.8);
+    padding: 1.2rem;
+    border-radius: 12px;
+}
+
+.info.right { 
+    margin-right: 2rem; 
+}
+
 .info { 
     text-align: center;
 }
+
 .stats {
     text-align: justify !important;
 }
@@ -57,7 +69,6 @@ h1 { text-align: center; }
     border: 2px solid #c2c2c2; /* чтобы создать "отступ" между треком и ползунком */
     min-height: 30px;
   }
-
 
   /* при активном перетаскивании */
   ::-webkit-scrollbar-thumb:active {
@@ -95,6 +106,7 @@ h1 { text-align: center; }
         margin-right: 0;
     }
 }
+
 
 
 
