@@ -436,8 +436,31 @@ charBtn.onclick = ()=> charModal.style.display = 'flex';
 closeChar.onclick = ()=> charModal.style.display = 'none';
 charModal.onclick = e => { if(e.target === charModal) charModal.style.display='none'; };
 </script>
+
+  <!-- Characters section -->
+<section id="characters" style="display:none;padding:1rem;">
+<h1 class="text-xl mb-4">Знакомые персонажи</h1>
+<div class="characters-wrap">
+<!-- TODO: заполнить персонажей -->
+</div>
+</section>
+
+
+<script>
+const btn = document.getElementById('btn-characters');
+const main = document.querySelector('.container');
+const chars = document.getElementById('characters');
+
+btn.addEventListener('click', () => {
+const isOpen = chars.style.display === 'block';
+chars.style.display = isOpen ? 'none' : 'block';
+main.style.display = isOpen ? 'grid' : 'none';
+});
+</script>
+</script>
 </body>
 </html>
+
 
 
 
