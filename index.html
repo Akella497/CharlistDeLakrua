@@ -275,7 +275,7 @@
             <div class="acc-body">
               <p class="muted">Броня забытого мистика: сделана из серого металла, что переливается кровавым багрянцем, если смотреть на него под разными углами.<br>
               6 брони, -1 получаемого урона от атак дальнего боя или дьявольщины.<br>
-              Добавляет к кубикам брони текущую эмпатию. При выпадении 1 на кубах характеристик при неполностью поглощенном уроне наносит урон по характеристике.<br><br>
+              Добавляет к кубикам брони текущую эмпатию. При выпадении 1 на кубах характеристик при неполностью поглощенном уроне наносит урон по характеристике.</p>
             </div>
           </div>
 
@@ -283,10 +283,20 @@
 
         <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
 
-        <h2>Особые правила</h2>
+        <h2>Ритуалы</h2>
         <div class="notes">
-          <p>Первое использование дневника — бесплатно, последующие — за стресс. Частое использование может повлечь за собой потерю эмпатии.</p>
+          <p>Подробное описание доступных ритуалов и стоимость их использования.</p>
         </div>
+
+         <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)">
+              <strong>Акерия — Дух Последнего Вздоха</strong>
+              <span class="tag">Подробно</span>
+            </div>
+            <div class="acc-body">
+              <p class="muted">Описание.</p>
+            </div>
+          </div>
       </section>
 
       <!-- ========== ПРАВАЯ КОЛОНКА: ТАЛАНТЫ И ДУХИ ========== -->
@@ -295,47 +305,47 @@
 
         <div class="talent">
           <strong>Лучший друг</strong>
-          <div class="muted">+3 ед. защиты от духа.</div>
+          <div class="muted">+3 ед. нерушимые защиты от духа.</div>
         </div>
 
         <div class="talent">
           <strong>Духовное исцеление</strong>
-          <div class="muted">Лечение через духовность. Требует ритуала и концентрации.</div>
+          <div class="muted">Лечение через духовность.</div>
         </div>
 
         <div class="talent">
           <strong>Девять жизней</strong>
-          <div class="muted">Особая механика — следует согласовать с мастером.</div>
-        </div>
-
-        <div class="talent">
-          <strong>Ритуализм: «Духовный резонанс: Акерия»</strong>
-          <div class="muted">Призыв Акерии — 1/день. Дух обладает статами и уникальными талантами (см. полное описание внизу).</div>
+          <div class="muted">При получении травмы имеется возможность выбрать любую иную посредством рандомайзера.</div>
         </div>
 
         <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
 
-        <h2>Духи / Дарители</h2>
+        <h2>Духи</h2>
         <div class="talent">
           <strong>Мороу</strong>
-          <div class="muted">Дарует таланты: Лучший друг, Духовное исцеление.</div>
+          <div class="muted">Жив (?). Пожертвовал собою ради де Лакруа.</div>
         </div>
 
         <div class="talent">
-          <strong>Акерия — Дух Последнего Вздоха</strong>
-          <div class="muted">При призыве: 8 смекалки. Дух не получает урон по телосложению/ловкости. Взаимосвязь с призывателем — смерть одного равна смерти другого.</div>
+          <strong>Акерия</strong>
+          <div class="muted">8 смекалки. Дух не получает урон по телосложению & ловкости. При гибели Акерии умирает и Люциус.</div>
+        </div>
+
+        <div class="talent">
+          <strong>Драугр</strong>
+          <div class="muted">Нынешний дух.</div>
         </div>
 
         <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
 
-        <h2>Секционные подсказки</h2>
-        <div class="muted">Подсказки для мастера: как применять таланты в бою, баланс использования артефактов, последствия долгого использования дневника.</div>
+        <h2>Дополнительная информация</h2>
+        <div class="muted">& Заметки!</div>
       </aside>
 
     </main>
 
     <footer style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center">
-      <div style="color:var(--muted)">Шаблон: улучшенный чарлист — адаптивный и печатаемый.</div>
+      <div style="color:var(--muted)">(с) by Akella.</div>
       <div style="display:flex;gap:.6rem;align-items:center">
         <a class="nav-link" href="#stats">Характеристики</a>
         <a class="nav-link" href="#story">История</a>
@@ -373,6 +383,7 @@
   </script>
 </body>
 </html>
+
 
 
 
