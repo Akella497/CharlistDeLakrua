@@ -1,4 +1,3 @@
-<style>
 /* ====== MAIN LAYOUT ====== */
 .container{
 display:grid;grid-template-columns:320px 1fr 360px;gap:var(--gap);padding:1rem 0;
@@ -76,6 +75,3 @@ nav{display:flex;flex-direction:column;gap:.5rem}
 /* небольшая анимация появления */
 .fade-in{animation:fadeIn .45s ease both}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-
-</style>
