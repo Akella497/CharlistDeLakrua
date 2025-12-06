@@ -1,72 +1,83 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Люциус де Лакруа — Чарлист</title>
-<link rel="icon" type="image/png" href="https://i.postimg.cc/XJSk855s/123.png">
-<link href="style.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Люциус де Лакруа — Чарлист</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/XJSk855s/123.png">
+    <link href="style.css" rel="stylesheet">
 </head>
-<strong>Духовное исцеление</strong>
-<div class="muted">Лечение через духовность. Требует ритуала и концентрации.</div>
+
+<body>
+
+<div class="container">
+
+    <main>
+
+        <div class="talent">
+            <strong>Духовное исцеление</strong>
+            <div class="muted">Лечение через духовность. Требует ритуала и концентрации.</div>
+        </div>
+
+        <div class="talent">
+            <strong>Девять жизней</strong>
+            <div class="muted">Особая механика — следует согласовать с мастером.</div>
+        </div>
+
+        <div class="talent">
+            <strong>Ритуализм: «Духовный резонанс: Акерия»</strong>
+            <div class="muted">Призыв Акерии — 1/день. Дух обладает статами и уникальными талантами.</div>
+        </div>
+
+        <hr>
+
+        <h2>Духи / Дарители</h2>
+
+        <div class="talent">
+            <strong>Мороу</strong>
+            <div class="muted">Дарует таланты: Лучший друг, Духовное исцеление.</div>
+        </div>
+
+        <div class="talent">
+            <strong>Акерия — Дух Последнего Вздоха</strong>
+            <div class="muted">При призыве: 8 смекалки. Дух не получает урон по телосложению/ловкости.</div>
+        </div>
+
+        <hr>
+
+        <h2>Секционные подсказки</h2>
+        <div class="muted">
+            Подсказки для мастера: как применять таланты в бою, баланс артефактов, последствия дневника.
+        </div>
+
+    </main>
+
 </div>
-<div class="talent">
-<strong>Девять жизней</strong>
-<div class="muted">Особая механика — следует согласовать с мастером.</div>
-</div>
-<div class="talent">
-<strong>Ритуализм: «Духовный резонанс: Акерия»</strong>
-<div class="muted">Призыв Акерии — 1/день. Дух обладает статами и уникальными талантами (см. полное описание внизу).</div>
-</div>
-<hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
-<h2>Духи / Дарители</h2>
-<div class="talent">
-<strong>Мороу</strong>
-<div class="muted">Дарует таланты: Лучший друг, Духовное исцеление.</div>
-</div>
-<div class="talent">
-<strong>Акерия — Дух Последнего Вздоха</strong>
-<div class="muted">При призыве: 8 смекалки. Дух не получает урон по телосложению/ловкости. Взаимосвязь с призывателем — смерть одного равна смерти другого.</div>
-</div>
-<hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
-<h2>Секционные подсказки</h2>
-<div class="muted">Подсказки для мастера: как применять таланты в бою, баланс использования артефактов, последствия долгого использования дневника.</div>
-</aside>
-</main
-<footer style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center">
-<div style="color:var(--muted)">Шаблон: улучшенный чарлист — адаптивный и печатаемый.</div>
-<div style="display:flex;gap:.6rem;align-items:center">
-<a class="nav-link" href="#stats">Характеристики</a>
-<a class="nav-link" href="#story">История</a>
-<a class="nav-link" href="#talents">Таланты</a>
-</div>
+
+<footer>
+    <div style="color:var(--muted)">Шаблон: улучшенный чарлист — адаптивный и печатаемый.</div>
+    <div style="display:flex;gap:.6rem;align-items:center">
+        <a class="nav-link" href="#stats">Характеристики</a>
+        <a class="nav-link" href="#story">История</a>
+        <a class="nav-link" href="#talents">Таланты</a>
+    </div>
 </footer>
-</div>
+
 <script>
-// Аккордеон: базовая логика (плавная высота)
 function toggleAcc(el){
-const item = el.parentElement;
-const body = item.querySelector('.acc-body');
-const isOpen = item.classList.contains('acc-open');
-if(isOpen){
-// закрываем
-body.style.height = body.scrollHeight + 'px';
-requestAnimationFrame(()=>{ body.style.height = '0px'; item.classList.remove('acc-open'); });
-} else {
-// открываем
-body.style.height = body.scrollHeight + 'px';
-item.classList.add('acc-open');
-// после анимации убрать фиксированную высоту
-setTimeout(()=>{ if(item.classList.contains('acc-open')) body.style.height = 'auto'; }, 260);
+    const item = el.parentElement;
+    const body = item.querySelector('.acc-body');
+    const isOpen = item.classList.contains('acc-open');
+    if(isOpen){
+        body.style.height = body.scrollHeight + 'px';
+        requestAnimationFrame(()=>{ body.style.height = '0px'; item.classList.remove('acc-open'); });
+    } else {
+        body.style.height = body.scrollHeight + 'px';
+        item.classList.add('acc-open');
+        setTimeout(()=>{ if(item.classList.contains('acc-open')) body.style.height = 'auto'; }, 260);
+    }
 }
-}
-// Инициализация: для открытых элементов выставим высоту
-document.querySelectorAll('.acc-item').forEach(i=>{
-if(i.classList.contains('acc-open')){
-const b = i.querySelector('.acc-body'); b.style.height = b.scrollHeight + 'px';
-setTimeout(()=>{ b.style.height = 'auto'; }, 260);
-}
-});
 </script>
+
 </body>
 </html>
-
