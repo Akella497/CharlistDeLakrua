@@ -186,6 +186,7 @@
   
 </head>
 <body>
+  <div id="page-main">
   <div class="page fade-in" role="main">
     <header>
       <div class="portrait-wrap">
@@ -416,6 +417,7 @@
       </div>
     </footer>
   </div>
+  </div>
 
   <script>
     // Аккордеон: базовая логика (плавная высота)
@@ -489,9 +491,13 @@ document.querySelector("#btn-back").addEventListener("click", () => {
     pageCharacters.style.display = "none";
     pageMain.style.display = "block";
 });
+
+    document.querySelector("#page-main").style.display = "none";
+document.querySelector("#page-characters").style.display = "block";
 </script>
 </body>
 </html>
+
 
 
 
