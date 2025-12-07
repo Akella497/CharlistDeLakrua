@@ -265,6 +265,11 @@
 
         </div>
 
+<h2 style="margin-top:2rem">Рубиновое Святилище</h2>
+<div id="ruby" class="items" style="min-height:60px;opacity:.8">
+  <p class="muted" id="ruby-empty">Пока пусто...</p>
+</div>
+
       </section>
 
       <!-- ========== СЕРЕДИНА: ИСТОРИЯ, АККОРДЕОНЫ ========== -->
@@ -446,9 +451,24 @@
         setTimeout(()=>{ b.style.height = 'auto'; }, 260);
       }
     });
+    
+document.querySelectorAll(".item").forEach(item => {
+    item.addEventListener("click", () => {
+        const ruby = document.getElementById("ruby");
+        const placeholder = document.getElementById("ruby-empty");
+
+        // если есть текст "Пока пусто..." — убираем
+        if (placeholder) placeholder.remove();
+
+        // перемещаем предмет
+        ruby.appendChild(item);
+    });
+});
+
   </script>
 </body>
 </html>
+
 
 
 
