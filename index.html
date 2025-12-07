@@ -129,7 +129,61 @@
     .fade-in{animation:fadeIn .45s ease both}
     @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
+    /* ЗНАКОМЫЕ ПЕРСОНАЖИ */
+
+    /* скрытая страница */
+.hidden {
+    display: none;
+}
+
+/* кнопка */
+.switch-btn {
+    margin: 1rem 0;
+    padding: .6rem 1rem;
+    border-radius: 10px;
+    background: var(--panel);
+    color: var(--accent);
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+}
+
+/* страница персонажей */
+#page-characters {
+    padding: 1rem;
+}
+
+.characters-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.character-card {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.35));
+}
+
+.character-card .portrait {
+    width: 160px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.char-text h2 {
+    margin: 0 0 .4rem;
+    color: var(--accent);
+}
+
+.char-text p {
+    color: var(--muted);
+}
   </style>
+  
 </head>
 <body>
   <div class="page fade-in" role="main">
@@ -297,6 +351,10 @@
               <p class="muted">Описание.</p>
             </div>
           </div>
+
+        <button id="btn-characters" class="switch-btn">
+    Знакомые персонажи
+        </button>
       </section>
 
       <!-- ========== ПРАВАЯ КОЛОНКА: ТАЛАНТЫ И ДУХИ ========== -->
@@ -386,8 +444,55 @@
       }
     });
   </script>
+
+  <!-- Вторая страница: Знакомые персонажи -->
+<div id="page-characters" class="page hidden">
+
+  <h1>Знакомые персонажи</h1>
+
+  <div class="characters-grid">
+
+    <!-- Карточка персонажа -->
+    <div class="character-card">
+      <img src="https://i.postimg.cc/your-image.jpg" class="portrait">
+      <div class="char-text">
+        <h2>Имя персонажа</h2>
+        <p>Здесь описание персонажа и его отношения с Люциусом.</p>
+      </div>
+    </div>
+
+    <!-- Ещё один персонаж -->
+    <div class="character-card">
+      <img src="https://i.postimg.cc/your-image2.jpg" class="portrait">
+      <div class="char-text">
+        <h2>Имя персонажа 2</h2>
+        <p>Описание, связь, бэкграунд.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <button id="btn-back" class="switch-btn">Назад к чарлисту</button>
+
+</div>
+
+  <script>
+const pageMain = document.querySelector("main");
+const pageCharacters = document.querySelector("#page-characters");
+
+document.querySelector("#btn-characters").addEventListener("click", () => {
+    pageMain.style.display = "none";
+    pageCharacters.style.display = "block";
+});
+
+document.querySelector("#btn-back").addEventListener("click", () => {
+    pageCharacters.style.display = "none";
+    pageMain.style.display = "block";
+});
+</script>
 </body>
 </html>
+
 
 
 
