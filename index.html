@@ -133,7 +133,7 @@
 
     /* скрытая страница */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* кнопка */
@@ -186,10 +186,10 @@
   
 </head>
 <body>
-  <div class="page fade-in" role="main">
+  <div class="page fade-in main-content" role="main">
     <header>
       <div class="portrait-wrap">
-        <img class="portrait" src="https://i.ibb.co/0RRSGwVj/image.png" alt="Портрет Люциус">
+        <img class="portrait" src="https://i.ibb.co/0RRSGwVj/image.png" alt="Портрет Люциуса">
       </div>
       <div>
         <h1>Люциус де Лакруа</h1>
@@ -477,22 +477,22 @@
 </div>
 
   <script>
-const pageMain = document.querySelector("main");
 const pageCharacters = document.querySelector("#page-characters");
+const pageMainAll = document.querySelectorAll(".main-content");
 
 document.querySelector("#btn-characters").addEventListener("click", () => {
-    pageMain.style.display = "none";
-    pageCharacters.style.display = "block";
+    pageMainAll.forEach(el => el.classList.add("hidden"));
+    pageCharacters.classList.remove("hidden");
 });
 
 document.querySelector("#btn-back").addEventListener("click", () => {
-    pageCharacters.style.display = "none";
-    pageMain.style.display = "block";
+    pageMainAll.forEach(el => el.classList.remove("hidden"));
+    pageCharacters.classList.add("hidden");
 });
-
 </script>
 </body>
 </html>
+
 
 
 
