@@ -425,106 +425,105 @@
     </footer>
   </div>
 
-  <script>
-    // Аккордеон: базовая логика (плавная высота)
+ <script>
+    // Аккордеон
     function toggleAcc(el){
-      const item = el.parentElement;
-      const body = item.querySelector('.acc-body');
-      const isOpen = item.classList.contains('acc-open');
-      if(isOpen){
-        // закрываем
-        body.style.height = body.scrollHeight + 'px';
-        requestAnimationFrame(()=>{ body.style.height = '0px'; item.classList.remove('acc-open'); });
-      } else {
-        // открываем
-        body.style.height = body.scrollHeight + 'px';
-        item.classList.add('acc-open');
-        // после анимации убрать фиксированную высоту
-        setTimeout(()=>{ if(item.classList.contains('acc-open')) body.style.height = 'auto'; }, 260);
-      }
-    }
+        const item = el.parentElement;
+        const body = item.querySelector('.acc-body');
+        const isOpen = item.classList.contains('acc-open');
 
-    // Инициализация: для открытых элементов выставим высоту
-    document.querySelectorAll('.acc-item').forEach(i=>{
-      if(i.classList.contains('acc-open')){
-        const b = i.querySelector('.acc-body'); b.style.height = b.scrollHeight + 'px';
-        setTimeout(()=>{ b.style.height = 'auto'; }, 260);
-      }
-    });
-    
-// Получаем контейнеры
-const inventory = document.getElementById("inventory");
-const ruby = document.getElementById("ruby");
-
-// Загружаем сохранение
-function loadState() {
-    const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
-
-  const inventory = document.getElementById("inventory");
-const ruby = document.getElementById("ruby");
-
-// Загрузка состояния
-function loadState() {
-    const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
-
-    document.querySelectorAll(".item").forEach(item => {
-        const id = item.dataset.id;
-        if (saved.includes(id)) {
-            ruby.appendChild(item);
+        if(isOpen){
+            body.style.height = body.scrollHeight + 'px';
+            requestAnimationFrame(()=>{ 
+                body.style.height = '0px'; 
+                item.classList.remove('acc-open'); 
+            });
         } else {
-            inventory.appendChild(item);
+            body.style.height = body.scrollHeight + 'px';
+            item.classList.add('acc-open');
+            setTimeout(()=>{ 
+                if(item.classList.contains('acc-open')) 
+                    body.style.height = 'auto'; 
+            }, 260);
+        }
+    }
+
+    document.querySelectorAll('.acc-item').forEach(i=>{
+        if(i.classList.contains('acc-open')){
+            const b = i.querySelector('.acc-body');
+            b.style.height = b.scrollHeight + 'px';
+            setTimeout(()=>{ b.style.height = 'auto'; }, 260);
         }
     });
 
-    updatePlaceholder();
-}
+    // ======= ИНВЕНТАРЬ / СВЯТИЛИЩЕ =======
 
-// Сохранение состояния
-function saveState() {
-    const ids = [...ruby.querySelectorAll(".item")].map(i => i.dataset.id);
-    localStorage.setItem("rubyItems", JSON.stringify(ids));
-}
+    const inventory = document.getElementById("inventory");
+    const ruby = document.getElementById("ruby");
 
-// Обновление надписи
-function updatePlaceholder() {
-    const placeholder = document.getElementById("ruby-empty");
+    // Загрузка состояния
+    function loadState() {
+        const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
 
-    if (ruby.querySelector(".item")) {
-        if (placeholder) placeholder.remove();
-    } else {
-        if (!placeholder) {
-            const p = document.createElement("p");
-            p.className = "muted";
-            p.id = "ruby-empty";
-            p.textContent = "Пока пусто...";
-            ruby.appendChild(p);
+        document.querySelectorAll(".item").forEach(item => {
+            const id = item.dataset.id;
+            if (saved.includes(id)) {
+                ruby.appendChild(item);
+            } else {
+                inventory.appendChild(item);
+            }
+        });
+
+        updatePlaceholder();
+    }
+
+    // Сохранение
+    function saveState() {
+        const ids = [...ruby.querySelectorAll(".item")].map(i => i.dataset.id);
+        localStorage.setItem("rubyItems", JSON.stringify(ids));
+    }
+
+    // Обновление надписи
+    function updatePlaceholder() {
+        const placeholder = document.getElementById("ruby-empty");
+
+        if (ruby.querySelector(".item")) {
+            if (placeholder) placeholder.remove();
+        } else {
+            if (!placeholder) {
+                const p = document.createElement("p");
+                p.className = "muted";
+                p.id = "ruby-empty";
+                p.textContent = "Пока пусто...";
+                ruby.appendChild(p);
+            }
         }
     }
-}
 
-// Переключение по клику
-function toggleItem(item) {
-    if (item.parentElement.id === "ruby") {
-        inventory.appendChild(item);
-    } else {
-        ruby.appendChild(item);
+    // Переключение
+    function toggleItem(item) {
+        if (item.parentElement.id === "ruby") {
+            inventory.appendChild(item);
+        } else {
+            ruby.appendChild(item);
+        }
+
+        updatePlaceholder();
+        saveState();
     }
 
-    updatePlaceholder();
-    saveState();
-}
+    // Клик по предметам
+    document.querySelectorAll(".item").forEach(item => {
+        item.addEventListener("click", () => toggleItem(item));
+    });
 
-// Привязка обработчиков
-document.querySelectorAll(".item").forEach(item => {
-    item.addEventListener("click", () => toggleItem(item));
-});
+    // Старт
+    loadState();
+</script>
 
-// Старт
-loadState();
-
-  </script>
 </body>
 </html>
+
 
 
 
