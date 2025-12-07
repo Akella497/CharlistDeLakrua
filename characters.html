@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Знакомые персонажи</title>
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/XJSk855s/123.png">
+  <style>
+    :root{
+      --bg:#060507; --panel:rgba(10,10,12,0.55); --panel-2:rgba(255,255,255,0.03);
+      --muted:#bfb7a8; --accent:#c9a86b; --text:#d6d2c8; --soft:rgba(255,255,255,0.02);
+      --radius:12px; --gap:1rem; --max-width:1000px;
+    }
+    body{
+      margin:0;background:var(--bg);color:var(--text);
+      font-family:Inter,Arial,sans-serif;
+      padding:2rem;display:flex;justify-content:center;
+    }
+    .page{
+      max-width:var(--max-width);width:100%;
+      background:linear-gradient(180deg,rgba(0,0,0,0.35),rgba(0,0,0,0.5));
+      border:1px solid rgba(255,255,255,0.03);
+      border-radius:18px;padding:1.5rem;
+    }
+    h1{color:var(--accent);margin-top:0;font-family:Georgia,serif}
+    .char{
+      display:flex;gap:1rem;background:var(--panel-2);
+      padding:1rem;border-radius:var(--radius);margin-bottom:1rem;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .char img{
+      width:160px;height:200px;object-fit:cover;border-radius:10px;
+      border:2px solid rgba(0,0,0,0.6);
+    }
+    .back{
+      display:inline-block;margin-bottom:1rem;
+      padding:.5rem 1rem;border-radius:8px;
+      background:var(--panel-2);
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);text-decoration:none;
+    }
+    .back:hover{color:var(--text)}
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <a href="index.html" class="back">← Назад к Люциусу</a>
+  <h1>Знакомые персонажи</h1>
+
+  <!-- === ПЕРСОНАЖ 1 === -->
+  <div class="char">
+    <img src="https://i.ibb.co/0RRSGwVj/image.png" alt="">
+    <div>
+      <h2 style="margin:0;color:var(--accent)">Имя персонажа</h2>
+      <p style="color:var(--muted)">Краткое описание, кто он, откуда, какие отношения с Люциусом.</p>
+    </div>
+  </div>
+
+  <!-- === ПЕРСОНАЖ 2 === -->
+  <div class="char">
+    <img src="https://via.placeholder.com/160x200" alt="">
+    <div>
+      <h2 style="margin:0;color:var(--accent)">Второй персонаж</h2>
+      <p style="color:var(--muted)">Здесь можно написать биографию и связь.</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
