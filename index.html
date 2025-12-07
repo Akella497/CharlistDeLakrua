@@ -212,7 +212,7 @@
         <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
 
         <h2>Инвентарь</h2>
-        <div class="items">
+        <div id="inventory" class="items">
 
           <div class="item" data-id="arkebuza">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
@@ -453,10 +453,17 @@
     });
     
 // Получаем контейнеры
-const inventory = document.querySelector(".items");
+const inventory = document.getElementById("inventory");
 const ruby = document.getElementById("ruby");
 
 // Загружаем сохранение
+function loadState() {
+    const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
+
+  const inventory = document.getElementById("inventory");
+const ruby = document.getElementById("ruby");
+
+// Загрузка состояния
 function loadState() {
     const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
 
@@ -464,19 +471,21 @@ function loadState() {
         const id = item.dataset.id;
         if (saved.includes(id)) {
             ruby.appendChild(item);
+        } else {
+            inventory.appendChild(item);
         }
     });
 
     updatePlaceholder();
 }
 
-// Сохраняем состояние
+// Сохранение состояния
 function saveState() {
     const ids = [...ruby.querySelectorAll(".item")].map(i => i.dataset.id);
     localStorage.setItem("rubyItems", JSON.stringify(ids));
 }
 
-// Обновление надписи "Пока пусто..."
+// Обновление надписи
 function updatePlaceholder() {
     const placeholder = document.getElementById("ruby-empty");
 
@@ -493,15 +502,11 @@ function updatePlaceholder() {
     }
 }
 
-// Переключение местами
+// Переключение по клику
 function toggleItem(item) {
-    const parent = item.parentElement;
-
-    if (parent.id === "ruby") {
-        // вернуть обратно
+    if (item.parentElement.id === "ruby") {
         inventory.appendChild(item);
     } else {
-        // отправить в святилище
         ruby.appendChild(item);
     }
 
@@ -509,18 +514,18 @@ function toggleItem(item) {
     saveState();
 }
 
-// Назначаем обработчики клика
+// Привязка обработчиков
 document.querySelectorAll(".item").forEach(item => {
     item.addEventListener("click", () => toggleItem(item));
 });
 
-// Первичная загрузка
+// Старт
 loadState();
-
 
   </script>
 </body>
 </html>
+
 
 
 
