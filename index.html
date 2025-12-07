@@ -214,7 +214,7 @@
         <h2>Инвентарь</h2>
         <div class="items">
 
-          <div class="item">
+          <div class="item" data-id="arkebuza">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Аркебуза <span class="tag">Снаряжение</span></h3>
@@ -222,7 +222,7 @@
             </div>
           </div>
 
-          <div class="item">
+          <div class="item" data-id="plash">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Маскировочный плащ <span class="tag">Снаряжение</span></h3>
@@ -230,7 +230,7 @@
             </div>
           </div>
 
-            <div class="item">
+            <div class="item" data-id="dospeh">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Доспех Багрового Мистика<span class="tag">Снаряжение</span></h3>
@@ -238,7 +238,7 @@
             </div>
           </div>
 
-          <div class="item">
+          <div class="item" data-id="book">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Дневник Будущего <span class="tag">Артефакт</span></h3>
@@ -246,7 +246,7 @@
             </div>
           </div>
 
-          <div class="item">
+          <div class="item" data-id="kulon">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Кулон «Солнце» <span class="tag">Артефакт</span></h3>
@@ -254,7 +254,7 @@
             </div>
           </div>
 
-            <div class="item">
+            <div class="item" data-id="book">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Дневник капитана Оди <span class="tag">Предмет</span></h3>
@@ -452,22 +452,76 @@
       }
     });
     
-document.querySelectorAll(".item").forEach(item => {
-    item.addEventListener("click", () => {
-        const ruby = document.getElementById("ruby");
-        const placeholder = document.getElementById("ruby-empty");
+// Получаем контейнеры
+const inventory = document.querySelector(".items");
+const ruby = document.getElementById("ruby");
 
-        // если есть текст "Пока пусто..." — убираем
-        if (placeholder) placeholder.remove();
+// Загружаем сохранение
+function loadState() {
+    const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
 
-        // перемещаем предмет
-        ruby.appendChild(item);
+    document.querySelectorAll(".item").forEach(item => {
+        const id = item.dataset.id;
+        if (saved.includes(id)) {
+            ruby.appendChild(item);
+        }
     });
+
+    updatePlaceholder();
+}
+
+// Сохраняем состояние
+function saveState() {
+    const ids = [...ruby.querySelectorAll(".item")].map(i => i.dataset.id);
+    localStorage.setItem("rubyItems", JSON.stringify(ids));
+}
+
+// Обновление надписи "Пока пусто..."
+function updatePlaceholder() {
+    const placeholder = document.getElementById("ruby-empty");
+
+    if (ruby.querySelector(".item")) {
+        if (placeholder) placeholder.remove();
+    } else {
+        if (!placeholder) {
+            const p = document.createElement("p");
+            p.className = "muted";
+            p.id = "ruby-empty";
+            p.textContent = "Пока пусто...";
+            ruby.appendChild(p);
+        }
+    }
+}
+
+// Переключение местами
+function toggleItem(item) {
+    const parent = item.parentElement;
+
+    if (parent.id === "ruby") {
+        // вернуть обратно
+        inventory.appendChild(item);
+    } else {
+        // отправить в святилище
+        ruby.appendChild(item);
+    }
+
+    updatePlaceholder();
+    saveState();
+}
+
+// Назначаем обработчики клика
+document.querySelectorAll(".item").forEach(item => {
+    item.addEventListener("click", () => toggleItem(item));
 });
+
+// Первичная загрузка
+loadState();
+
 
   </script>
 </body>
 </html>
+
 
 
 
