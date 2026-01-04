@@ -350,6 +350,7 @@ h1{
 
 <script>
 const STORAGE_KEY = "diana_player_sheet";
+const NOTES_KEY = "diana_notes";
 
 /* ===== СОСТОЯНИЕ ===== */
 let state = {
@@ -367,6 +368,11 @@ const hiveEl = document.getElementById("hive");
 const shadowEl = document.getElementById("shadow");
 const churchEl = document.getElementById("church");
 
+const notesPanel = document.getElementById("notesPanel");
+const notesToggle = document.getElementById("notesToggle");
+const notesClose = document.getElementById("notesClose");
+const notesArea = document.getElementById("notesArea");
+
 /* ===== ПОДСВЕТКА РЕЗОНАНСА ===== */
 function updateResColor(){
   resEl.classList.remove("res-green","res-yellow","res-red");
@@ -380,20 +386,22 @@ function updateResColor(){
   }
 }
 
-/* ===== ЗАГРУЗКА ===== */
+/* ===== ЗАГРУЗКА СОСТОЯНИЯ ===== */
 function loadState(){
   const saved = localStorage.getItem(STORAGE_KEY);
-  if(!saved){
-    updateResColor();
-    return;
+  if(saved){
+    state = JSON.parse(saved);
+    resEl.textContent = state.resonance;
+    hiveEl.value = state.factions.hive;
+    shadowEl.value = state.factions.shadow;
+    churchEl.value = state.factions.church;
   }
 
-  state = JSON.parse(saved);
-
-  resEl.textContent = state.resonance;
-  hiveEl.value = state.factions.hive;
-  shadowEl.value = state.factions.shadow;
-  churchEl.value = state.factions.church;
+  // авто-рост текстовых полей при загрузке
+  [hiveEl, shadowEl, churchEl].forEach(el => {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  });
 
   updateResColor();
 }
@@ -403,7 +411,7 @@ function saveState(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-/* ===== РЕЗОНАНС ===== */
+/* ===== ИЗМЕНЕНИЕ РЕЗОНАНСА ===== */
 function changeRes(delta){
   state.resonance += delta;
   resEl.textContent = state.resonance;
@@ -411,48 +419,58 @@ function changeRes(delta){
   saveState();
 }
 
-/* ===== ТЕКСТОВЫЕ ПОЛЯ ===== */
+/* ===== ТЕКСТОВЫЕ ПОЛЯ С АВТО-РОСТОМ ===== */
 [hiveEl, shadowEl, churchEl].forEach((el, i) => {
   const keys = ["hive", "shadow", "church"];
+
+  function autoResize() {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
+  }
 
   el.addEventListener("input", () => {
     state.factions[keys[i]] = el.value;
     saveState();
+    autoResize();
   });
-});
-  
-/* ===== ЗАМЕТКИ ===== */
-const NOTES_KEY = "diana_notes";
 
-const notesPanel = document.getElementById("notesPanel");
-const notesToggle = document.getElementById("notesToggle");
-const notesClose = document.getElementById("notesClose");
-const notesArea = document.getElementById("notesArea");
-
-/* открыть / закрыть */
-notesToggle.addEventListener("click", () => {
-  notesPanel.classList.add("open");
+  // начальное авто-растягивание при загрузке
+  window.addEventListener("load", autoResize);
 });
 
-notesClose.addEventListener("click", () => {
-  notesPanel.classList.remove("open");
-});
+/* ===== ПАНЕЛЬ ЗАМЕТОК ===== */
+if(notesPanel && notesToggle && notesClose && notesArea){
 
-/* загрузка */
-const savedNotes = localStorage.getItem(NOTES_KEY);
-if (savedNotes) {
-  notesArea.value = savedNotes;
+  // открыть / закрыть
+  notesToggle.addEventListener("click", () => {
+    notesPanel.classList.toggle("open");
+  });
+
+  notesClose.addEventListener("click", () => {
+    notesPanel.classList.remove("open");
+  });
+
+  // загрузка сохранённых заметок
+  const savedNotes = localStorage.getItem(NOTES_KEY);
+  if(savedNotes) notesArea.value = savedNotes;
+
+  // авто-рост textarea заметок
+  function autoResizeNotes(){
+    notesArea.style.height = "auto";
+    notesArea.style.height = notesArea.scrollHeight + "px";
+  }
+  notesArea.addEventListener("input", () => {
+    localStorage.setItem(NOTES_KEY, notesArea.value);
+    autoResizeNotes();
+  });
+
+  window.addEventListener("load", autoResizeNotes);
 }
 
-/* сохранение */
-notesArea.addEventListener("input", () => {
-  localStorage.setItem(NOTES_KEY, notesArea.value);
-});
-
-  
 /* ===== СТАРТ ===== */
 loadState();
 </script>
+
 
 
 </body>
