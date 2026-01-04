@@ -172,24 +172,11 @@
 
 /* Панель */
 .notes-panel {
-  position: fixed;
-  top: 0;
   left: 0;
   transform: translateX(-100%);
-  width: 320px;
-  height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(30,38,45,0.95),
-    rgba(12,16,20,0.98)
-  );
-  border-right: 1px solid rgba(180,150,90,.25);
-  box-shadow: 4px 0 20px rgba(0,0,0,.6);
-  transition: transform .3s ease;
-  z-index: 1001;
-  display: flex;
-  flex-direction: column;
+  transition: transform 0.3s ease;
 }
+
 
 .notes-panel.open {
   transform: translateX(0);
@@ -566,20 +553,12 @@ function toggleAcc(el) {
   } else {
     body.style.height = body.scrollHeight + 'px';
     item.classList.add('acc-open');
-    setTimeout(() => {
+    body.addEventListener('transitionend', () => {
       if (item.classList.contains('acc-open')) body.style.height = 'auto';
-    }, 260);
+    }, { once: true });
   }
 }
 
-// Инициализация открытых аккордеонов
-document.querySelectorAll('.acc-item').forEach(i => {
-  if (i.classList.contains('acc-open')) {
-    const b = i.querySelector('.acc-body');
-    b.style.height = b.scrollHeight + 'px';
-    setTimeout(() => { b.style.height = 'auto'; }, 260);
-  }
-});
 
 // ===== ИНВЕНТАРЬ =====
 const inventory = document.getElementById("inventory");
@@ -649,14 +628,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!notesPanel || !notesToggle || !notesClose || !notesArea) return;
 
-  // Открытие / закрытие панели
-  notesToggle.addEventListener("click", () => {
-    notesPanel.classList.toggle("open");
-  });
+  notesToggle.addEventListener("click", () => notesPanel.classList.toggle("open"));
+  notesClose.addEventListener("click", () => notesPanel.classList.remove("open"));
 
-  notesClose.addEventListener("click", () => {
-    notesPanel.classList.remove("open");
+  notesArea.value = localStorage.getItem(NOTES_KEY) || "";
+
+  notesArea.addEventListener("input", () => {
+    localStorage.setItem(NOTES_KEY, notesArea.value);
   });
+});
 
   // Загрузка заметок из localStorage
   const savedNotes = localStorage.getItem(NOTES_KEY);
@@ -673,6 +653,7 @@ loadState();
   </script>
 </body>
 </html>
+
 
 
 
