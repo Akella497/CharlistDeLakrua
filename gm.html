@@ -1,1 +1,217 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Диана Дриг — Лист персонажа</title>
 
+<style>
+:root{
+  --bg:#060507;
+  --panel:rgba(10,10,12,.6);
+  --soft:rgba(255,255,255,.03);
+  --text:#d6d2c8;
+  --muted:#bfb7a8;
+  --accent:#c9a86b;
+  --radius:12px;
+  --gap:1rem;
+  --max:900px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter, Trebuchet MS, Arial, sans-serif;
+  padding:2rem;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.page{
+  width:100%;
+  max-width:var(--max);
+  background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.6));
+  border-radius:18px;
+  padding:1.5rem;
+  border:1px solid var(--soft);
+  box-shadow:0 10px 40px rgba(0,0,0,.6);
+}
+
+/* ===== HEADER ===== */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--soft);
+  padding-bottom:1rem;
+}
+
+h1{
+  margin:0;
+  font-family:Georgia, serif;
+  color:var(--accent);
+  letter-spacing:.6px;
+}
+
+.sub{
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+/* ===== PANELS ===== */
+.panel{
+  background:linear-gradient(180deg,rgba(255,255,255,.02),var(--panel));
+  border:1px solid var(--soft);
+  border-radius:var(--radius);
+  padding:1rem;
+}
+
+.panel h2{
+  margin:0 0 .6rem 0;
+  font-size:1.05rem;
+  color:var(--accent);
+}
+
+/* ===== RESONANCE ===== */
+.resonance{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+
+.res-value{
+  font-size:1.6rem;
+  font-weight:700;
+  min-width:48px;
+  text-align:center;
+}
+
+.res-btn{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--soft);
+  color:var(--text);
+  padding:.4rem .8rem;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.res-btn:hover{background:rgba(255,255,255,.08)}
+.res-btn:active{transform:scale(.95)}
+
+/* ===== FACTIONS ===== */
+.factions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--gap);
+}
+
+.faction{
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+
+.faction h3{
+  margin:0;
+  font-size:1rem;
+  color:var(--accent);
+  text-align:center;
+}
+
+.faction textarea{
+  resize:vertical;
+  min-height:120px;
+  background:rgba(0,0,0,.35);
+  border:1px solid var(--soft);
+  border-radius:10px;
+  color:var(--text);
+  padding:.6rem;
+  font-family:inherit;
+  font-size:.95rem;
+}
+
+.faction textarea::placeholder{
+  color:var(--muted);
+}
+
+/* ===== LAYOUT ===== */
+.main{
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  margin-top:1.2rem;
+}
+
+@media(max-width:800px){
+  .factions{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>Диана Дриг</h1>
+    <div class="sub">Игровой персонаж</div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- РЕЗОНАНС -->
+  <section class="panel">
+    <h2>Резонанс</h2>
+    <div class="resonance">
+      <button class="res-btn" onclick="changeRes(-1)">−</button>
+      <div id="resValue" class="res-value">3</div>
+      <button class="res-btn" onclick="changeRes(1)">+</button>
+    </div>
+  </section>
+
+  <!-- ОТНОШЕНИЯ С ФРАКЦИЯМИ -->
+  <section class="panel">
+    <h2>Отношение с фракциями</h2>
+
+    <div class="factions">
+
+      <div class="faction">
+        <h3>Улей</h3>
+        <textarea placeholder="Отношение, контакты, долги..."></textarea>
+      </div>
+
+      <div class="faction">
+        <h3>«Тень»</h3>
+        <textarea placeholder="Связи, угрозы, договорённости..."></textarea>
+      </div>
+
+      <div class="faction">
+        <h3>Церковь Экстаза</h3>
+        <textarea placeholder="Доверие, подозрения, ритуалы..."></textarea>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+</div>
+
+<script>
+let resonance = 3;
+const resEl = document.getElementById("resValue");
+
+function changeRes(delta){
+  resonance += delta;
+  resEl.textContent = resonance;
+}
+</script>
+</body>
+</html>
