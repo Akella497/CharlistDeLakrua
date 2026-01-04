@@ -304,7 +304,7 @@
             </div>
           </div>
 
-            <div class="item data-id="armor"">
+            <div class="item data-id="armor">
             <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Доспех Багрового Мистика<span class="tag">Снаряжение</span></h3>
@@ -542,7 +542,7 @@
 
   <textarea
     id="notesArea"
-    placeholder="Здесь можно писать любые заметки о Диане Дриг..."
+    placeholder="Здесь можно писать любые заметки"
   ></textarea>
 </div>
 
@@ -636,7 +636,8 @@ document.querySelectorAll(".item").forEach(item => {
     item.addEventListener("click", () => toggleItem(item));
 });
 
-    const NOTES_KEY = "diana_notes";
+    const NOTES_KEY = "lucius_notes";
+
 
 const notesPanel = document.getElementById("notesPanel");
 const notesToggle = document.getElementById("notesToggle");
@@ -669,6 +670,7 @@ loadState();
   </script>
 </body>
 </html>
+
 
 
 
