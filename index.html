@@ -639,21 +639,32 @@ document.querySelectorAll(".item").forEach(item => {
 });
 
 // ===== ЗАМЕТКИ =====
-const NOTES_KEY = "lucius_notes";
-const notesPanel = document.getElementById("notesPanel");
-const notesToggle = document.getElementById("notesToggle");
-const notesClose = document.getElementById("notesClose");
-const notesArea = document.getElementById("notesArea");
+document.addEventListener("DOMContentLoaded", () => {
+  const NOTES_KEY = "lucius_notes";
+  const notesPanel = document.getElementById("notesPanel");
+  const notesToggle = document.getElementById("notesToggle");
+  const notesClose = document.getElementById("notesClose");
+  const notesArea = document.getElementById("notesArea");
 
-notesToggle.addEventListener("click", () => notesPanel.classList.toggle("open"));
-notesClose.addEventListener("click", () => notesPanel.classList.remove("open"));
+  if (!notesPanel || !notesToggle || !notesClose || !notesArea) return;
 
-// Загрузка заметок
-notesArea.value = localStorage.getItem(NOTES_KEY) || "";
+  // Открытие / закрытие панели
+  notesToggle.addEventListener("click", () => {
+    notesPanel.classList.toggle("open");
+  });
 
-// Сохранение заметок
-notesArea.addEventListener("input", () => {
-  localStorage.setItem(NOTES_KEY, notesArea.value);
+  notesClose.addEventListener("click", () => {
+    notesPanel.classList.remove("open");
+  });
+
+  // Загрузка заметок из localStorage
+  const savedNotes = localStorage.getItem(NOTES_KEY);
+  if (savedNotes) notesArea.value = savedNotes;
+
+  // Сохранение заметок при вводе
+  notesArea.addEventListener("input", () => {
+    localStorage.setItem(NOTES_KEY, notesArea.value);
+  });
 });
 
 // ===== СТАРТ =====
@@ -661,6 +672,7 @@ loadState();
   </script>
 </body>
 </html>
+
 
 
 
