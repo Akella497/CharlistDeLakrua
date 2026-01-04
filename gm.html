@@ -151,6 +151,49 @@ h1{
   margin-top:1.2rem;
 }
 
+  /* ===== РЕЗОНАНС: ЦВЕТА ===== */
+.res-value{
+  transition: .25s;
+  border-radius: 10px;
+  padding: .3rem .6rem;
+}
+
+.res-green{
+  color: #9be6b4;
+  background: rgba(60,120,90,.15);
+  box-shadow: 0 0 10px rgba(60,180,120,.25);
+}
+
+.res-yellow{
+  color: #f3d98b;
+  background: rgba(160,130,40,.18);
+  box-shadow: 0 0 12px rgba(240,200,80,.25);
+}
+
+.res-red{
+  color: #f1a3a3;
+  background: rgba(160,60,60,.2);
+  box-shadow: 0 0 14px rgba(230,80,80,.35);
+}
+  
+.header-left{
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+}
+
+.avatar{
+  width:140px;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  border:2px solid rgba(0,0,0,.6);
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+
 @media(max-width:800px){
   .factions{grid-template-columns:1fr}
 }
@@ -161,11 +204,19 @@ h1{
 <div class="page">
 
 <header>
-  <div>
+  <div class="header-left">
     <h1>Диана Дриг</h1>
-    <div class="sub">Игровой персонаж</div>
+
+    <img
+      class="avatar"
+      src="https://i.imgur.com/sLtB3sh.png"
+      alt="Аватар Дианы Дриг"
+    >
+
+    <div class="sub">Химик из Ирувии</div>
   </div>
 </header>
+
 
 <div class="main">
 
@@ -248,8 +299,10 @@ function saveState(){
 function changeRes(delta){
   state.resonance += delta;
   resEl.textContent = state.resonance;
+  updateResColor();
   saveState();
 }
+
 
 /* ===== ТЕКСТОВЫЕ ПОЛЯ ===== */
 [hiveEl, shadowEl, churchEl].forEach((el, i) => {
@@ -261,8 +314,37 @@ function changeRes(delta){
   });
 });
 
+  function updateResColor(){
+  resEl.classList.remove("res-green","res-yellow","res-red");
+
+  if(state.resonance <= 10){
+    resEl.classList.add("res-green");
+  } else if(state.resonance <= 19){
+    resEl.classList.add("res-yellow");
+  } else {
+    resEl.classList.add("res-red");
+  }
+}
+
+
 /* ===== СТАРТ ===== */
-loadState();
+function loadState(){
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if(!saved) {
+    updateResColor(); // ← даже если данных нет, подсветка нужна
+    return;
+  }
+
+  state = JSON.parse(saved);
+
+  resEl.textContent = state.resonance;
+  hiveEl.value = state.factions.hive;
+  shadowEl.value = state.factions.shadow;
+  churchEl.value = state.factions.church;
+
+  updateResColor(); // ← ВАЖНО: после установки resonance
+}
+
 </script>
 
 </body>
