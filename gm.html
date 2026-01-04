@@ -127,18 +127,22 @@ h1{
   text-align:center;
 }
 
-.faction textarea {
-    resize: vertical;
-    min-height: 120px;
-    background: rgba(0, 0, 0, .35);
-    border: 1px solid var(--soft);
-    border-radius: 10px;
-    color: var(--text);
-    padding: .6rem;
-    font-family: inherit;
-    font-size: .95rem;
-    text-align: center;
+.faction textarea.auto-resize {
+  width: 100%;
+  min-height: 80px;
+  max-height: 400px; /* при желании */
+  background: #1e262d; /* темный фон */
+  color: #d6caa5; /* золотистый текст */
+  border: 1px solid rgba(180,150,90,0.25);
+  border-radius: 4px;
+  padding: 0.6rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: none; /* запрет на ручное изменение */
+  overflow: hidden; /* скрыть скроллбар */
 }
+
+
 
 .faction textarea::placeholder{
   color:var(--muted);
@@ -345,24 +349,25 @@ body::-webkit-scrollbar-thumb:active {
   <section class="panel">
     <h2>Отношение с фракциями</h2>
 
-    <div class="factions">
+<div class="factions">
 
-      <div class="faction">
-        <h3>Улей</h3>
-        <textarea id="hive" placeholder="..."></textarea>
-      </div>
+  <div class="faction">
+    <h3>Улей</h3>
+    <textarea class="auto-resize" id="hive" placeholder="..."></textarea>
+  </div>
 
-      <div class="faction">
-        <h3>«Тень»</h3>
-        <textarea id="shadow" placeholder="..."></textarea>
-      </div>
+  <div class="faction">
+    <h3>«Тень»</h3>
+    <textarea class="auto-resize" id="shadow" placeholder="..."></textarea>
+  </div>
 
-      <div class="faction">
-        <h3>Церковь Экстаза</h3>
-        <textarea id="church" placeholder="..."></textarea>
-      </div>
+  <div class="faction">
+    <h3>Церковь Экстаза</h3>
+    <textarea class="auto-resize" id="church" placeholder="..."></textarea>
+  </div>
 
-    </div>
+</div>
+
   </section>
   
 <!-- Кнопка открытия -->
@@ -504,6 +509,16 @@ if(notesPanel && notesToggle && notesClose && notesArea){
 
   window.addEventListener("load", autoResizeNotes);
 }
+
+  document.querySelectorAll('textarea.auto-resize').forEach(el => {
+  function autoResize() {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+  el.addEventListener('input', autoResize);
+  autoResize(); // для загрузки сохранённого текста
+});
+
 
 /* ===== СТАРТ ===== */
 loadState();
