@@ -156,7 +156,7 @@
 .notes-toggle {
   position: fixed;
   left: 0;
-  top: 50%;
+  top: 40%;
   transform: translateY(-50%);
   padding: 0.6rem 0.8rem;
   background: #1e262d;
@@ -165,7 +165,7 @@
   cursor: pointer;
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  z-index: 1100;
+  z-index: 1000;
 }
 
 /* Панель заметок */
@@ -180,9 +180,9 @@
   box-shadow: 4px 0 20px rgba(0,0,0,0.6);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
-  z-index: 1050;
 }
 
 /* Панель открыта */
@@ -190,7 +190,7 @@
   transform: translateX(0);
 }
 
-/* Заголовок панели */
+/* Заголовок */
 .notes-header {
   display: flex;
   justify-content: space-between;
@@ -208,7 +208,7 @@
   cursor: pointer;
 }
 
-/* Поле ввода текста */
+/* Поле ввода */
 #notesArea {
   flex: 1;
   background: transparent;
@@ -516,7 +516,7 @@
 
     </main>
 
-    <!-- Кнопка открытия -->
+<!-- Кнопка открытия -->
 <button id="notesToggle" class="notes-toggle">Заметки</button>
 
 <!-- Панель заметок -->
@@ -527,6 +527,8 @@
   </div>
   <textarea id="notesArea" placeholder="Здесь можно писать любые заметки"></textarea>
 </div>
+
+
 
 
     <footer style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center">
@@ -625,37 +627,33 @@ function toggleItem(item) {
 }
 
         // Заметки
-    document.addEventListener("DOMContentLoaded", () => {
-  const NOTES_KEY = "my_notes";
+document.addEventListener("DOMContentLoaded", () => {
   const notesPanel = document.getElementById("notesPanel");
   const notesToggle = document.getElementById("notesToggle");
   const notesClose = document.getElementById("notesClose");
   const notesArea = document.getElementById("notesArea");
+  const NOTES_KEY = "lucius_notes";
 
   if (!notesPanel || !notesToggle || !notesClose || !notesArea) return;
 
-  // открыть панель
+  // Клик по кнопке — открыть/закрыть
   notesToggle.addEventListener("click", () => {
     notesPanel.classList.toggle("open");
   });
 
-  // закрыть панель
+  // Клик по кресту — закрыть
   notesClose.addEventListener("click", () => {
     notesPanel.classList.remove("open");
   });
 
-  // загрузка заметок из localStorage
-  notesArea.value = localStorage.getItem(NOTES_KEY) || "";
+  // Загрузка заметок из localStorage
+  const savedNotes = localStorage.getItem(NOTES_KEY);
+  if (savedNotes) notesArea.value = savedNotes;
 
-  // сохранение заметок при вводе
+  // Сохранение при вводе
   notesArea.addEventListener("input", () => {
     localStorage.setItem(NOTES_KEY, notesArea.value);
   });
-});
-
-// Привязка обработчиков
-document.querySelectorAll(".item").forEach(item => {
-    item.addEventListener("click", () => toggleItem(item));
 });
 
 // Старт
@@ -663,6 +661,7 @@ loadState();
   </script>
 </body>
 </html>
+
 
 
 
