@@ -278,10 +278,26 @@ const hiveEl = document.getElementById("hive");
 const shadowEl = document.getElementById("shadow");
 const churchEl = document.getElementById("church");
 
+/* ===== ПОДСВЕТКА РЕЗОНАНСА ===== */
+function updateResColor(){
+  resEl.classList.remove("res-green","res-yellow","res-red");
+
+  if(state.resonance <= 10){
+    resEl.classList.add("res-green");
+  } else if(state.resonance <= 19){
+    resEl.classList.add("res-yellow");
+  } else {
+    resEl.classList.add("res-red");
+  }
+}
+
 /* ===== ЗАГРУЗКА ===== */
 function loadState(){
   const saved = localStorage.getItem(STORAGE_KEY);
-  if(!saved) return;
+  if(!saved){
+    updateResColor();
+    return;
+  }
 
   state = JSON.parse(saved);
 
@@ -289,6 +305,8 @@ function loadState(){
   hiveEl.value = state.factions.hive;
   shadowEl.value = state.factions.shadow;
   churchEl.value = state.factions.church;
+
+  updateResColor();
 }
 
 /* ===== СОХРАНЕНИЕ ===== */
@@ -304,7 +322,6 @@ function changeRes(delta){
   saveState();
 }
 
-
 /* ===== ТЕКСТОВЫЕ ПОЛЯ ===== */
 [hiveEl, shadowEl, churchEl].forEach((el, i) => {
   const keys = ["hive", "shadow", "church"];
@@ -315,38 +332,10 @@ function changeRes(delta){
   });
 });
 
-  function updateResColor(){
-  resEl.classList.remove("res-green","res-yellow","res-red");
-
-  if(state.resonance <= 10){
-    resEl.classList.add("res-green");
-  } else if(state.resonance <= 19){
-    resEl.classList.add("res-yellow");
-  } else {
-    resEl.classList.add("res-red");
-  }
-}
-
-
 /* ===== СТАРТ ===== */
-function loadState(){
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if(!saved) {
-    updateResColor(); // ← даже если данных нет, подсветка нужна
-    return;
-  }
-
-  state = JSON.parse(saved);
-
-  resEl.textContent = state.resonance;
-  hiveEl.value = state.factions.hive;
-  shadowEl.value = state.factions.shadow;
-  churchEl.value = state.factions.church;
-
-  updateResColor(); // ← ВАЖНО: после установки resonance
-}
-
+loadState();
 </script>
+
 
 </body>
 </html>
