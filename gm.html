@@ -194,6 +194,77 @@ h1{
     inset 0 1px 0 rgba(255,255,255,.03);
 }
 
+  /* Кнопка */
+.notes-toggle {
+  position: fixed;
+  left: 0;
+  top: 40%;
+  transform: translateY(-50%);
+  padding: .6rem .8rem;
+  background: #1e262d;
+  color: #d6caa5;
+  border: 1px solid rgba(180,150,90,.35);
+  cursor: pointer;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  z-index: 1000;
+}
+
+/* Панель */
+.notes-panel {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 320px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(30,38,45,0.95),
+    rgba(12,16,20,0.98)
+  );
+  border-right: 1px solid rgba(180,150,90,.25);
+  box-shadow: 4px 0 20px rgba(0,0,0,.6);
+  transition: left .3s ease;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.notes-panel.open {
+  left: 0;
+}
+
+/* Заголовок */
+.notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .8rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(180,150,90,.2);
+}
+
+.notes-header button {
+  background: none;
+  border: none;
+  color: #d6caa5;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Поле ввода */
+#notesArea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 1rem;
+  color: #e0dcc8;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: .95rem;
+}
+
 
 @media(max-width:800px){
   .factions{grid-template-columns:1fr}
@@ -254,7 +325,24 @@ h1{
 
     </div>
   </section>
+  
+<!-- Кнопка открытия -->
+<button id="notesToggle" class="notes-toggle">Заметки</button>
 
+<!-- Панель заметок -->
+<div id="notesPanel" class="notes-panel">
+  <div class="notes-header">
+    <span>Заметки персонажа</span>
+    <button id="notesClose">×</button>
+  </div>
+
+  <textarea
+    id="notesArea"
+    placeholder="Здесь можно писать любые заметки о Диане Дриг..."
+  ></textarea>
+</div>
+
+  
 </div>
 
 </div>
@@ -331,7 +419,36 @@ function changeRes(delta){
     saveState();
   });
 });
+  
+/* ===== ЗАМЕТКИ ===== */
+const NOTES_KEY = "diana_notes";
 
+const notesPanel = document.getElementById("notesPanel");
+const notesToggle = document.getElementById("notesToggle");
+const notesClose = document.getElementById("notesClose");
+const notesArea = document.getElementById("notesArea");
+
+/* открыть / закрыть */
+notesToggle.addEventListener("click", () => {
+  notesPanel.classList.add("open");
+});
+
+notesClose.addEventListener("click", () => {
+  notesPanel.classList.remove("open");
+});
+
+/* загрузка */
+const savedNotes = localStorage.getItem(NOTES_KEY);
+if (savedNotes) {
+  notesArea.value = savedNotes;
+}
+
+/* сохранение */
+notesArea.addEventListener("input", () => {
+  localStorage.setItem(NOTES_KEY, notesArea.value);
+});
+
+  
 /* ===== СТАРТ ===== */
 loadState();
 </script>
