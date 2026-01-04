@@ -266,6 +266,44 @@ h1{
   font-size: .95rem;
 }
 
+  /* ========== ОБЩИЙ СТИЛЬ СКРОЛЛБАРА ========== */
+body {
+  scrollbar-width: thin;       /* Firefox */
+  scrollbar-color: #b4a65a #1e262d; /* Ползунок / фон */
+}
+
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+  width: 12px;                 /* ширина скроллбара */
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e262d;         /* фон дорожки */
+  border-left: 1px solid rgba(180,150,90,0.2);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #b4a65a, #8f7a3d); /* градиент ползунка */
+  border-radius: 6px;
+  border: 2px solid #1e262d;  /* контур, чтобы выглядел «вырезанным» */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #d6caa5, #b4a65a);
+}
+
+/* Альтернатива: тонкая тень */
+body::-webkit-scrollbar-thumb:active {
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+/* Стили для контейнеров с overflow */
+.scroll-container {
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 6px; /* чтобы контент не прятался за скроллбар */
+}
+
 
 @media(max-width:800px){
   .factions{grid-template-columns:1fr}
