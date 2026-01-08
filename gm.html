@@ -298,6 +298,9 @@ body {
   background: #000;
 }
 
+/*Заметки справа*/
+
+
 
 
 /* Стили для контейнеров с overflow */
@@ -308,7 +311,93 @@ body {
 }
 
 
+/*Заметки2*/
 
+  .notes-toggle-right {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  padding: 8px 12px;
+  background: #1e262d;
+  color: #d6caa5;
+  border: 1px solid rgba(180,150,90,.35);
+  cursor: pointer;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Панель справа */
+.notes-panel-right {
+  position: fixed;
+  top: 0;
+  right: -320px; /* спрятана за правой границей */
+  width: 320px;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(30,38,45,0.95), rgba(12,16,20,0.98));
+  border-left: 1px solid rgba(180,150,90,.25);
+  box-shadow: -4px 0 20px rgba(0,0,0,.6);
+  transition: right 0.3s ease;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Открытая панель */
+.notes-panel-right.open {
+  right: 0;
+}
+
+/* Заголовок */
+.notes-panel-right .notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .8rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(180,150,90,.2);
+}
+
+.notes-panel-right .notes-header button {
+  background: none;
+  border: none;
+  color: #d6caa5;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* textarea */
+#notesAreaRight {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 1rem;
+  color: #e0dcc8;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: .95rem;
+  overflow-y: auto;
+}
+
+/* Чёрный скроллбар для textarea */
+#notesAreaRight::-webkit-scrollbar {
+  width: 6px;
+}
+
+#notesAreaRight::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#notesAreaRight::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 999px;
+}
+
+#notesAreaRight::-webkit-scrollbar-thumb:hover {
+  background: #000;
+}
 
 @media(max-width:800px){
   .factions{grid-template-columns:1fr}
@@ -392,11 +481,23 @@ body {
   ></textarea>
 </div>
 
+
+<!-- Кнопка открытия второй панели -->
+<button id="notesRightToggle" class="notes-toggle-right">Заметки справа</button>
+
+<!-- Вторая панель -->
+<div id="notesPanelRight" class="notes-panel-right">
+  <div class="notes-header">
+    <span>Заметки справа</span>
+    <button id="notesRightClose">×</button>
+  </div>
+
+  <textarea
+    id="notesAreaRight"
+    placeholder="Здесь можно писать заметки справа..."
+  ></textarea>
+</div>
   
-</div>
-
-</div>
-
 <script>
 const STORAGE_KEY = "diana_player_sheet";
 const NOTES_KEY = "diana_notes";
@@ -525,6 +626,41 @@ if(notesPanel && notesToggle && notesClose && notesArea){
   autoResize(); // для загрузки сохранённого текста
 });
 
+
+  /*Заметки*/
+
+  // Получаем элементы
+const notesPanelRight = document.getElementById('notesPanelRight');
+const notesRightToggle = document.getElementById('notesRightToggle');
+const notesRightClose = document.getElementById('notesRightClose');
+const notesAreaRight = document.getElementById('notesAreaRight');
+
+// Открыть/закрыть
+notesRightToggle.addEventListener('click', () => {
+  notesPanelRight.classList.toggle('open');
+});
+
+notesRightClose.addEventListener('click', () => {
+  notesPanelRight.classList.remove('open');
+});
+
+// Сохраняем заметки во втором textarea
+const NOTES_RIGHT_KEY = 'diana_notes_right';
+const savedNotesRight = localStorage.getItem(NOTES_RIGHT_KEY);
+if(savedNotesRight) notesAreaRight.value = savedNotesRight;
+
+notesAreaRight.addEventListener('input', () => {
+  localStorage.setItem(NOTES_RIGHT_KEY, notesAreaRight.value);
+  // Авто-рост
+  notesAreaRight.style.height = 'auto';
+  notesAreaRight.style.height = notesAreaRight.scrollHeight + 'px';
+});
+
+// Начальное авто-растягивание
+window.addEventListener('load', () => {
+  notesAreaRight.style.height = 'auto';
+  notesAreaRight.style.height = notesAreaRight.scrollHeight + 'px';
+});
 
 /* ===== СТАРТ ===== */
 loadState();
