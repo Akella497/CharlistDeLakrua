@@ -517,6 +517,7 @@ const resEl = document.getElementById("resValue");
 const hiveEl = document.getElementById("hive");
 const shadowEl = document.getElementById("shadow");
 const churchEl = document.getElementById("church");
+const gustavEl = document.getElementById("gustav");
 
 const notesPanel = document.getElementById("notesPanel");
 const notesToggle = document.getElementById("notesToggle");
@@ -545,10 +546,11 @@ function loadState(){
     hiveEl.value = state.factions.hive;
     shadowEl.value = state.factions.shadow;
     churchEl.value = state.factions.church;
+    gustavEl.value = state.factions.gustav;
   }
 
   // авто-рост текстовых полей при загрузке
-  [hiveEl, shadowEl, churchEl].forEach(el => {
+  [hiveEl, shadowEl, churchEl, gustavEl].forEach(el => {
     el.style.height = "auto";
     el.style.height = el.scrollHeight + "px";
   });
@@ -570,8 +572,8 @@ function changeRes(delta){
 }
 
 /* ===== ТЕКСТОВЫЕ ПОЛЯ С АВТО-РОСТОМ ===== */
-[hiveEl, shadowEl, churchEl].forEach((el, i) => {
-  const keys = ["hive", "shadow", "church"];
+[hiveEl, shadowEl, churchEl, gustavEl].forEach((el, i) => {
+  const keys = ["hive", "shadow", "church", "gustav"];
 
   function autoResize() {
     el.style.height = "auto";
