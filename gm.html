@@ -276,27 +276,28 @@ body {
   scrollbar-color: #b4a65a #1e262d; /* Ползунок / фон */
 }
 
-/* Chrome, Edge, Safari */
-body::-webkit-scrollbar {
-  width: 12px;
+/* Chrome, Edge, Safari — для всего документа */
+*::-webkit-scrollbar {
+  width: 6px;
 }
 
-body::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background: transparent;
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background: #000;
   border-radius: 999px;
 }
 
-body::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
   background: #000;
 }
 
-body::-webkit-scrollbar-thumb:active {
+*::-webkit-scrollbar-thumb:active {
   background: #000;
 }
+
 
 
 /* Стили для контейнеров с overflow */
