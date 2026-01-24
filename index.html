@@ -5,153 +5,386 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Люциус де Лакруа</title>
   <link rel="icon" type="image/png" href="https://i.postimg.cc/XJSk855s/123.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     /* ====== ПЕРЕМЕННЫЕ ТЕМЫ ====== */
     :root{
-      --bg: #060507;
-      --panel: rgba(10,10,12,0.55);
-      --panel-2: rgba(255,255,255,0.03);
-      --muted: #bfb7a8;
+      --bg: #0a0a0f;
+      --panel: #1a1a24;
+      --panel-light: #252535;
+      --muted: #8b8b9a;
       --accent: #c9a86b;
-      --accent-2: #7fc3ff;
+      --accent-dark: #9d7e4a;
+      --accent-bright: #e8c78a;
       --danger: #e07b7b;
-      --glass: rgba(255,255,255,0.04);
-      --radius: 12px;
-      --gap: 1rem;
-      --max-width: 1200px;
-      --text: #d6d2c8;
-      --soft: rgba(255,255,255,0.02);
+      --text: #e0e0e8;
+      --border: rgba(201, 168, 107, 0.2);
+      --radius: 6px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
-    /* ====== АППЛАЙБРАЙТ ====== */
-    *{box-sizing: border-box}
-    html,body{height:100%;}
+    /* ====== БАЗОВЫЕ СТИЛИ ====== */
+    *{box-sizing: border-box; margin: 0; padding: 0;}
+    html,body{height:100%; background: var(--bg);}
     body{
-      margin:0;
-      font-family: Inter, Trebuchet MS, Arial, sans-serif;
-      background-color:var(--bg);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:2rem;
-      display:flex;justify-content:center;align-items:flex-start;
+      font-family: 'Merriweather', Georgia, serif;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      padding: 20px;
     }
 
-    /* фоновой паттерн и бленд */
+    /* ====== КОНТЕЙНЕР СТРАНИЦЫ ====== */
     .page{
-      width:100%;
-      max-width:var(--max-width);
-      backdrop-filter: blur(6px) saturate(0.9);
-      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.5));
-      border-radius:18px;
-      padding:1.2rem;
-      box-shadow:0 10px 40px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.03);
+      max-width: 1400px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #0f0f18 0%, #1a1a24 100%);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
+    /* ====== HEADER ====== */
     header{
-      display:flex;gap:1rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--soft);
+      background: linear-gradient(135deg, #1a1a24 0%, #252535 100%);
+      border-bottom: 2px solid var(--border);
+      padding: 30px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
     }
 
-    .portrait-wrap{display:flex;gap:1rem;align-items:center}
+    .portrait-wrap{display: flex; gap: 20px; align-items: center;}
     .portrait{
-      width:120px;height:160px;object-fit:cover;border-radius:8px;border:2px solid rgba(0,0,0,0.6);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      width: 140px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 3px solid var(--accent);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     }
 
-    h1{font-family: 'Georgia', serif;margin:0;font-size:1.6rem;letter-spacing:0.6px;color:var(--accent);}
-    .sub{color:var(--muted);font-size:.95rem}
+    h1{
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
 
-    /* ====== MAIN LAYOUT ====== */
+    .sub{
+      color: var(--muted);
+      font-size: 1rem;
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+    }
+
+    /* ====== ГЛАВНЫЙ LAYOUT ====== */
     .container{
-      display:grid;grid-template-columns:320px 1fr 360px;gap:var(--gap);padding:1rem 0;
+      display: grid;
+      grid-template-columns: 360px 1fr 380px;
+      gap: 20px;
+      padding: 30px;
     }
 
-    /* ====== Панели/карточки ====== */
+    /* ====== ПАНЕЛИ ====== */
     .panel{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), var(--panel));
-      border-radius:var(--radius);
-      padding:1rem;
-      border: 1px solid rgba(255,255,255,0.03);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .panel h2{margin:0 0 .6rem 0;font-size:1.05rem;color:var(--accent);}
-    .panel .muted{color:var(--muted);font-size:.9rem}
-
-    /* ====== Характеристики ====== */
-    .stats{display:flex;flex-direction:column;gap:.6rem}
-    .stat{display:flex;justify-content:space-between;align-items:center;padding:.45rem .6rem;background:var(--panel-2);border-radius:8px}
-    .stat .label{font-weight:600;color:var(--muted)}
-    .stat .value{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));padding:.3rem .6rem;border-radius:6px;min-width:36px;text-align:center;font-weight:700}
-
-    /* прогресс для характеристики */
-    .bar{height:8px;background:rgba(255,255,255,0.03);border-radius:8px;overflow:hidden;margin-top:.45rem}
-    .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent), #ffd48a);}
-
-    /* ====== Список предметов ====== */
-    .items{display:flex;flex-direction:column;gap:.6rem}
-    .item{display:flex;gap:.8rem;align-items:flex-start;padding:.6rem;border-radius:10px;background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.02)}
-    .item h3{margin:0;font-size:.98rem;color:var(--accent-2)}
-    .item p{margin:0;color:var(--muted);font-size:.95rem}
-    .tag{font-size:.78rem;padding:.18rem .45rem;border-radius:999px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.02);color:var(--muted)}
-
-    /* ====== Аккордеон для длинных описаний ====== */
-    .accordion{border-radius:10px;overflow:hidden}
-    .acc-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.6rem;cursor:pointer}
-    .acc-body{height:0;overflow:hidden;padding:0 .6rem;transition:height .25s ease, padding .25s ease}
-    .acc-open .acc-body{padding:.6rem;height:auto}
-
-    /* ====== Таланты и духи ====== */
-    .talent{padding:.6rem;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));border:1px solid rgba(255,255,255,0.02);margin-bottom:.6rem}
-    .talent strong{color:var(--accent)}
-
-    /* ====== Нижняя панель с заметками ====== */
-    .notes{font-size:.95rem;color:var(--muted)}
-
-    /* ====== Навигация по странице (справа/слева) ====== */
-    nav{display:flex;flex-direction:column;gap:.5rem}
-    .nav-link{padding:.45rem .6rem;border-radius:8px;color:var(--muted);text-decoration:none;border:1px solid rgba(255,255,255,0.02);background:var(--panel-2);display:flex;justify-content:space-between;align-items:center}
-    .nav-link:hover{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));color:var(--text)}
-
-    /* ====== Респонсив ====== */
-    @media (max-width: 980px){
-      .container{grid-template-columns:1fr;}
-      .portrait{width:140px;height:180px}
+    .panel h2{
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* scrollbar */
-    ::-webkit-scrollbar{width:10px;height:10px}
-    ::-webkit-scrollbar-track{background:transparent}
-    ::-webkit-scrollbar-thumb{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.3));border-radius:999px}
-
-    /* небольшая анимация появления */
-    .fade-in{animation:fadeIn .45s ease both}
-    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-    .btn-characters {
-    display: inline-block;
-    margin-top: 20px;
-    margin-left: 6rem;
-    padding: 12px 20px;
-    background: var(--accent);
-    color: #000;
-    font-weight: bold;
-    border-radius: 8px;
-    text-align: center;
-    text-decoration: none;
-    transition: 0.2s;
+    .add-btn{
+      background: var(--accent);
+      color: #000;
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(201, 168, 107, 0.3);
     }
 
-    .btn-characters:hover {
-    background: #e8c78a; /* чуть светлее */
-    transform: translateY(-2px);
+    .add-btn:hover{
+      background: var(--accent-bright);
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.5);
     }
 
-.btn-characters:active {
-    transform: scale(0.97);
-}
+    /* ====== ХАРАКТЕРИСТИКИ ====== */
+    .stats{display: flex; flex-direction: column; gap: 12px;}
+    .stat{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--panel-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
 
+    .stat .label{
+      font-weight: 600;
+      color: var(--accent);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
+    }
+
+    .stat .value{
+      background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+      color: #000;
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      min-width: 40px;
+      text-align: center;
+      font-weight: 700;
+      font-family: 'Cinzel', serif;
+      box-shadow: 0 2px 8px rgba(201, 168, 107, 0.3);
+    }
+
+    .bar{
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .bar > i{
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-dark), var(--accent-bright));
+    }
+
+    /* ====== ПРЕДМЕТЫ ====== */
+    .items{display: flex; flex-direction: column; gap: 12px;}
+    .item{
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      background: var(--panel-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .item:hover{
+      background: #2a2a3a;
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.2);
+    }
+
+    .item h3{
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      color: var(--accent-bright);
+      margin-bottom: 4px;
+    }
+
+    .item p{
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .tag{
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 3px;
+      background: rgba(201, 168, 107, 0.15);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'Cinzel', serif;
+      margin-left: 8px;
+    }
+
+    /* ====== АККОРДЕОН ====== */
+    .accordion{margin-top: 16px;}
+    .acc-item{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: var(--panel-light);
+    }
+
+    .acc-head{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .acc-head:hover{
+      background: #2a2a3a;
+    }
+
+    .acc-head strong{
+      font-family: 'Cinzel', serif;
+      color: var(--accent);
+      font-size: 1.05rem;
+    }
+
+    .acc-body{
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 14px;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .acc-item.acc-open .acc-body{
+      max-height: 2000px;
+      padding: 14px;
+    }
+
+    /* ====== ТАЛАНТЫ ====== */
+    .talent{
+      padding: 14px;
+      background: var(--panel-light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .talent:hover{
+      background: #2a2a3a;
+      border-color: var(--accent);
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.2);
+    }
+
+    .talent strong{
+      font-family: 'Cinzel', serif;
+      color: var(--accent);
+      font-size: 1.05rem;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .talent .muted{
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ====== КНОПКИ ====== */
+    .btn-characters{
+      display: inline-block;
+      margin-top: 24px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+      color: #000;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.3);
+    }
+
+    .btn-characters:hover{
+      background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(201, 168, 107, 0.4);
+    }
+
+    /* ====== FOOTER ====== */
+    footer{
+      padding: 20px 30px;
+      border-top: 2px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--panel);
+    }
+
+    .nav-link{
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: var(--panel-light);
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover{
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    /* ====== HR ====== */
+    hr{
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 20px 0;
+    }
+
+    /* ====== ПЛЕЙСХОЛДЕР ====== */
+    #ruby-empty{
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ====== РЕСПОНСИВ ====== */
+    @media (max-width: 1200px){
+      .container{grid-template-columns: 1fr;}
+      h1{font-size: 1.8rem;}
+    }
+
+    /* ====== SCROLLBAR ====== */
+    ::-webkit-scrollbar{width: 12px; height: 12px;}
+    ::-webkit-scrollbar-track{background: var(--panel);}
+    ::-webkit-scrollbar-thumb{
+      background: linear-gradient(180deg, var(--accent-dark), var(--accent));
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover{
+      background: var(--accent-bright);
+    }
+
+    /* ====== АНИМАЦИЯ ====== */
+    .fade-in{animation: fadeIn 0.6s ease both;}
+    @keyframes fadeIn{
+      from{opacity: 0; transform: translateY(20px);}
+      to{opacity: 1; transform: none;}
+    }
   </style>
 </head>
 <body>
@@ -160,19 +393,19 @@
       <div class="portrait-wrap">
         <img class="portrait" src="https://i.ibb.co/0RRSGwVj/image.png" alt="Портрет Люциус">
       </div>
-      <div>
+      <div style="flex:1">
         <h1>Люциус де Лакруа</h1>
         <div class="sub">Акоросец · Фракция: Пламенный Круг · Мистик</div>
-        <div style="margin-top:.6rem;color:var(--muted);font-size:.95rem"><i>• Некоторые духи будут милее людей •</i></div>
+        <div style="margin-top:12px;color:var(--muted);font-style:italic">• Некоторые духи будут милее людей •</div>
       </div>
-      <div style="margin-left:auto;display:flex;gap:.6rem;align-items:center">
-        <div style="text-align:right;color:var(--muted);font-size:.9rem">Создано: 07.12.2025</div>
+      <div style="text-align:right;color:var(--muted);font-size:0.9rem">
+        Создано: 07.12.2025
       </div>
     </header>
 
     <main class="container" aria-label="Character sheet">
 
-      <!-- ========== ЛЕВАЯ КОЛОНКА: ХАРАКТЕРИСТИКИ И ИНВЕНТАРЬ ========== -->
+      <!-- ========== ЛЕВАЯ КОЛОНКА ========== -->
       <section class="panel" id="stats">
         <h2>Характеристики</h2>
         <div class="stats">
@@ -180,7 +413,7 @@
             <div class="label">Телосложение</div>
             <div style="text-align:right">
               <div class="value">3</div>
-              <div class="bar" aria-hidden><i style="width:50%"></i></div>
+              <div class="bar"><i style="width:50%"></i></div>
             </div>
           </div>
 
@@ -188,7 +421,7 @@
             <div class="label">Ловкость</div>
             <div style="text-align:right">
               <div class="value">4</div>
-              <div class="bar" aria-hidden><i style="width:75%"></i></div>
+              <div class="bar"><i style="width:75%"></i></div>
             </div>
           </div>
 
@@ -196,7 +429,7 @@
             <div class="label">Смекалка</div>
             <div style="text-align:right">
               <div class="value">2</div>
-              <div class="bar" aria-hidden><i style="width:25%"></i></div>
+              <div class="bar"><i style="width:25%"></i></div>
             </div>
           </div>
 
@@ -204,228 +437,216 @@
             <div class="label">Эмпатия</div>
             <div style="text-align:right">
               <div class="value">5</div>
-              <div class="bar" aria-hidden><i style="width:100%"></i></div>
+              <div class="bar"><i style="width:100%"></i></div>
             </div>
           </div>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
+        <hr>
 
-        <h2>Инвентарь</h2>
+        <h2>
+          Инвентарь 
+          <button class="add-btn" id="addInventoryBtn">+</button>
+        </h2>
         <div id="inventory" class="items">
 
           <div class="item" data-id="gun">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Аркебуза <span class="tag">Снаряжение</span></h3>
-              <p class="muted">Длинноствольное оружие — требует перезарядки. Стреляет раз в ход. 3 урона, 2 прочности.</p>
+              <p>Длинноствольное оружие — требует перезарядки. Стреляет раз в ход. 3 урона, 2 прочности.</p>
             </div>
           </div>
 
           <div class="item" data-id="hidden">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Маскировочный плащ <span class="tag">Снаряжение</span></h3>
-              <p class="muted">Легкая защита и бонус к проверкам скрытности (+2) при использовании. Подарок от отца.</p>
+              <p>Легкая защита и бонус к проверкам скрытности (+2) при использовании. Подарок от отца.</p>
             </div>
           </div>
 
-            <div class="item data-id="armor"">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
+          <div class="item" data-id="armor">
             <div style="flex:1">
-              <h3>Доспех Багрового Мистика<span class="tag">Снаряжение</span></h3>
-              <p class="muted">6 единиц прочности + прочность, зависящая от количества единиц эмпатии. -1 урон от дъяволщины и дальнобойных атак.</p>
+              <h3>Доспех Багрового Мистика <span class="tag">Снаряжение</span></h3>
+              <p>6 единиц прочности + прочность, зависящая от количества единиц эмпатии. -1 урон от дъяволщины и дальнобойных атак.</p>
             </div>
           </div>
 
           <div class="item" data-id="book">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Дневник Будущего <span class="tag">Артефакт</span></h3>
-              <p class="muted">Дарует видение ближайшего будущего.</p>
+              <p>Дарует видение ближайшего будущего.</p>
             </div>
           </div>
 
           <div class="item" data-id="sun">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Кулон «Солнце» <span class="tag">Артефакт</span></h3>
-              <p class="muted">Придает оружию статус <strong>огненное</strong> на 1 бросок. Можно использовать 2 раза за 2 ИРЛ дня.</p>
+              <p>Придает оружию статус <strong>огненное</strong> на 1 бросок. Можно использовать 2 раза за 2 ИРЛ дня.</p>
             </div>
           </div>
 
           <div class="item" data-id="box">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Таинственная шкатулка с рунами <span class="tag">Артефакт</span></h3>
-              <p class="muted">В ней заточен таинственный невидимый дух, идущий по пятам мистика.</p>
+              <p>В ней заточен таинственный невидимый дух, идущий по пятам мистика.</p>
             </div>
           </div>
 
           <div class="item" data-id="bat">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Бэт-крюк <span class="tag">Предмет</span></h3>
-              <p class="muted">Снаряжение исчезнувшего героя, некогда сражавшегося за справедливость на улицах Города Тьмы. Даёт +2 (снаряжение) при проверках Проворства, когда персонаж хочет куда-то залезть.
-Кроме того, можно использовать в бою за манёвр, чтобы передвинуть персонажа до средней дистанции в высоту. Перезарядка - 2 манёвра.</p>
+              <p>Снаряжение исчезнувшего героя, некогда сражавшегося за справедливость на улицах Города Тьмы.</p>
             </div>
           </div>
 
-            <div class="item" data-id="zont">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
+          <div class="item" data-id="zont">
             <div style="flex:1">
-              <h3>Зонт-трость рода Кроу<span class="tag">Предмет</span></h3>
-              <p class="muted">+1 к влиянию при использовании вместе с шикарным костюмом. +2 к влиянию на слуг рода Кроу. Не занимает места в инвентаре.</p>
+              <h3>Зонт-трость рода Кроу <span class="tag">Предмет</span></h3>
+              <p>+1 к влиянию при использовании вместе с шикарным костюмом. +2 к влиянию на слуг рода Кроу.</p>
             </div>
           </div>
 
-            <div class="item" data-id="ody">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
+          <div class="item" data-id="ody">
             <div style="flex:1">
               <h3>Дневник капитана Оди <span class="tag">Предмет</span></h3>
-              <p class="muted">Дневник господина Оди с картой утонувшего корабля с различными артефактами и прочим добром. Сокровища левиафанобоев. Ведущий: fokxer.</p>
+              <p>Дневник господина Оди с картой утонувшего корабля с различными артефактами.</p>
             </div>
           </div>
 
           <div class="item" data-id="flashlight">
-            <div style="min-width:44px;text-align:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12h16" stroke="currentColor" stroke-width="1.5" opacity="0.6"/></svg></div>
             <div style="flex:1">
               <h3>Фонарик <span class="tag">Предмет</span></h3>
-              <p class="muted">Да будет свет.</p>
+              <p>Да будет свет.</p>
             </div>
           </div>
         </div>
 
         <h2 style="margin-top:2rem">Рубиновое Святилище</h2>
-<div id="ruby" class="items" style="min-height:60px;opacity:.8">
-  <p class="muted" id="ruby-empty">Пока пусто...</p>
-</div>
+        <div id="ruby" class="items" style="min-height:60px">
+          <p id="ruby-empty">Пока пусто...</p>
+        </div>
 
       </section>
 
-      <!-- ========== СЕРЕДИНА: ИСТОРИЯ, АККОРДЕОНЫ ========== -->
+      <!-- ========== ЦЕНТРАЛЬНАЯ КОЛОНКА ========== -->
       <section class="panel" id="story">
-        <h2>Детали</h2>
-        <div style="color:var(--muted);font-size:.98rem">
-          <p>Информация об уникальных предметах.</p>
-        </div>
+        <h2>
+          Детали 
+          <button class="add-btn" id="addDetailBtn">+</button>
+        </h2>
+        <p style="color:var(--muted)">Информация об уникальных предметах.</p>
 
-        <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
-
-        <div class="accordion" id="equipment-accordion">
+        <div class="accordion" id="detailsAccordion">
 
           <div class="acc-item">
-            <div class="acc-head" onclick="toggleAcc(this)">
+            <div class="acc-head">
               <strong>Полное описание: Дневник Будущего</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-            <p class="muted">Дневник Будущего: Предмет показывает ближайшее будущее, если его пользователь продолжит идти тем же путем, что и раньше.
-              Когда владелец открывает дневник, он может увидеть в нем заметки о грядущем возможном важном значимом событии в его жизни - большая радость, печаль, утрата, смерть, находка. Мастер обязан давать правдивый ответ о поджидающих опасностях, наградах, встречах и т.д. в текущей сцене, при условии, что действия персонажа оставались бы по своему концепту такими же. Один раз за бой и только в бою, можно использовать артефакт, чтобы рассчитать следующий бросок атаки или защиты любого типа подобно таланту ищейки "Рассчитать удар". Использовать можно без перезарядки, однако частое использование имеет негативные последствия. Первый раз обратиться к дневнику можно бесплатно. Второй раз - за 1 стресс, Третий - за 2 стресса и так далее. Счетчик обнуляется через 2 ИРЛ дня после последнего обращения к дневнику. Если пользователь после использования дневника теряет боеспособность, то он навсегда лишается 1 эмпатии.</p>
+              <p style="color:var(--muted)">Привет! Дневник Будущего: Предмет показывает ближайшее будущее, если его пользователь продолжит идти тем же путем, что и раньше.</p>
             </div>
           </div>
 
           <div class="acc-item">
-            <div class="acc-head" onclick="toggleAcc(this)">
+            <div class="acc-head">
               <strong>Полное описание: Кулон «Солнце»</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p class="muted">Этот кулон мой последний подарок тому, кто зажигает пламя». 2 раза в игровые сутки (= 2 ИРЛ дня) Люциус может придать своему оружию статус «огненное» на один бросок.</p>
+              <p style="color:var(--muted)">Привет! Этот кулон мой последний подарок тому, кто зажигает пламя. 2 раза в игровые сутки Люциус может придать своему оружию статус «огненное» на один бросок.</p>
             </div>
+          </div>
 
-            <div class="acc-item">
-            <div class="acc-head" onclick="toggleAcc(this)">
+          <div class="acc-item">
+            <div class="acc-head">
               <strong>Полное описание: Доспех Багрового Мистика</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p class="muted">Броня забытого мистика: сделана из серого металла, что переливается кровавым багрянцем, если смотреть на него под разными углами.<br>
-              6 брони, -1 получаемого урона от атак дальнего боя или дьявольщины.<br>
-              Добавляет к кубикам брони текущую эмпатию. При выпадении 1 на кубах характеристик при неполностью поглощенном уроне наносит урон по характеристике.</p>
+              <p style="color:var(--muted)">Привет! Броня забытого мистика: сделана из серого металла, что переливается кровавым багрянцем.</p>
             </div>
           </div>
 
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
+        <hr>
 
-        <h2>Ритуалы</h2>
-        <div class="notes">
-          <p>Подробное описание доступных ритуалов и стоимость их использования.</p>
-        </div>
+        <h2>
+          Ритуалы 
+          <button class="add-btn" id="addRitualBtn">+</button>
+        </h2>
+        <p style="color:var(--muted);margin-bottom:16px">Подробное описание доступных ритуалов и стоимость их использования.</p>
 
-         <div class="acc-item">
-        <div class="acc-head" onclick="toggleAcc(this)">
+        <div id="ritualsAccordion">
+          <div class="acc-item">
+            <div class="acc-head">
               <strong>Акерия — Дух Последнего Вздоха</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p class="muted">
-                    <p>Таланты:</p>
-    <p><strong>• Духовный союз:</strong> При убийстве врага с помощью духа, находящегося в пределах ближней дистанции, Вы восполняете часть своего здоровья, напитавшись душой жертвы. Восполняемое здоровье равно половине кубов характеристики, что упала до 0 у цели (округление в меньшую сторону).</p>
-    <p><strong>• Неуязвимость к Страданию:</strong> Призрак, а теперь и Вы сами, не чувствуете боли. На Вас больше не действует запугивание, а при попытке повлиять на Вас цель получает -2 куба-модификатора к этому действию.</p>
-    <p><strong>• Последний вдох:</strong> 2 единицы урона за успех. Обычный удар духа через духовность. Каждый удар тратит 1 куб-характеристику эмпатии мистика.</p>
-    <p><strong>• Кокон из Морока:</strong> Призрак заворачивает жертву в сгусток эфирной тьмы. Жертва теряет ориентацию и более не различает, кто является союзником, а кто врагом. Приоритетной целью для него становится ближайший к жертве враг. Тратит действие на активацию таланта и 1 куб-характеристик мистика единожды. Не более 1 цели. Кокон рушится и перестает действовать после 4 ударов.
-    </p>
-    <p>• Слом Воли: Призрак может «выдернуть» одну эмоцию у цели (например: страх, надежду, ярость). Потеря эмоции ломает боевой дух. Тратит действие. Действует 1-2 хода, в зависимости от траты эмпатии Мистика (1-2).
-        <p>1. Лишение страха: Цель бросается в бой на сильнейшего врага, цель не может обороняться (бросать кубики «драки», «брони» и т.д.).</p>
-        <p>2. Лишение надежды: Цель более не участвует в бою. Она скидывает всё свое оружие и пытается отдалится на максимально далекое расстояние.</p>
-        <p>3. Ярость: Цель лишается всяческого смысла сражаться далее и заместо этого может лишь оказывать помощь союзникам.</p>
-    <p><strong>• Холод Древности:</strong> Призрак погружает поле боя в свою «эпоху смерти» — место и время, когда он погиб. Враги вынуждены сражаться в условиях чужой реальности, отчего каждый получает -2 куба-модификатора к каждому действию, а мистик получает +2 куба-модификатора. Тратит и действие, и маневр. Требуется концентрация Акерии каждый ход. Тратит 1 куб-характеристик эмпатии единожды.
-    </p>
-                </p>
+              <div style="color:var(--muted)">
+                <p>Привет! Таланты духа Акерии:</p>
+                <p><strong>• Духовный союз:</strong> При убийстве врага восполняете часть здоровья.</p>
+                <p><strong>• Неуязвимость к Страданию:</strong> Не чувствуете боли.</p>
+              </div>
             </div>
           </div>
+        </div>
 
-          <a class="btn-characters" href="characters.html">Знакомые персонажи</a>
+        <a class="btn-characters" href="characters.html">Знакомые персонажи</a>
       </section>
 
-      <!-- ========== ПРАВАЯ КОЛОНКА: ТАЛАНТЫ И ДУХИ ========== -->
+      <!-- ========== ПРАВАЯ КОЛОНКА ========== -->
       <aside class="panel" id="talents">
-        <h2>Таланты</h2>
+        <h2>
+          Таланты 
+          <button class="add-btn" id="addTalentBtn">+</button>
+        </h2>
 
-        <div class="talent">
-          <strong>Лучший друг</strong>
-          <div class="muted">+3 ед. нерушимые защиты от духа.</div>
+        <div id="talentsList">
+          <div class="talent">
+            <strong>Лучший друг</strong>
+            <div class="muted">+3 ед. нерушимые защиты от духа.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Духовное исцеление</strong>
+            <div class="muted">Лечение через духовность.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Материальность</strong>
+            <div class="muted">Дух способен взаимодействовать с окружением.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Девять жизней</strong>
+            <div class="muted">При получении травмы имеется возможность выбрать любую иную посредством рандомайзера.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Дурные приметы</strong>
+            <div class="muted">Бросок «Наблюдательность» осуществляется через Эмпатию.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Опытный боец</strong>
+            <div class="muted">Инициативность х2 перед боем.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Изгнавший демона</strong>
+            <div class="muted">+2 к броску влияния против дьявольщины.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Умиротворитель духов</strong>
+            <div class="muted">+2 на любые неагрессивные действия по отношению к духам.</div>
+          </div>
         </div>
 
-        <div class="talent">
-          <strong>Духовное исцеление</strong>
-          <div class="muted">Лечение через духовность.</div>
-        </div>
-
-        <div class="talent">
-          <strong>Материальность</strong>
-          <div class="muted">Дух способен взаимодействовать с окружением.</div>
-        </div>
-
-        <div class="talent">
-          <strong>Девять жизней</strong>
-          <div class="muted">При получении травмы имеется возможность выбрать любую иную посредством рандомайзера.</div>
-        </div>
-
-        <div class="talent">
-          <strong>Дурные приметы</strong>
-          <div class="muted">Бросок «Наблюдательность» осуществляется через Эмпатию.</div>
-        </div>
-
-        <div class="talent">
-          <strong>Опытный боец</strong>
-          <div class="muted">Инициативность х2 перед боем.</div>
-        </div>
-
-        <div class="talent">
-          <strong>Изгнавший демона</strong>
-          <div class="muted">+2 к броску влияния против дьявольщины; +2 к броску анализа против чего-либо потустороннего (дьявольщина, дьявольские символы & артефакты)</div>
-        </div>
-
-        <div class="talent">
-          <strong>Умиротворитель духов</strong>
-          <div class="muted">+2 на любые неагрессивные действия по отношению к агрессивным & мстительным духам.</div>
-        </div>
-
-        <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
+        <hr>
 
         <h2>Духи</h2>
         <div class="talent">
@@ -435,7 +656,7 @@
 
         <div class="talent">
           <strong>Акерия</strong>
-          <div class="muted">8 смекалки. Дух не получает урон по телосложению & ловкости. При гибели Акерии умирает и Люциус.</div>
+          <div class="muted">8 смекалки. Дух не получает урон по телосложению & ловкости.</div>
         </div>
 
         <div class="talent">
@@ -443,7 +664,7 @@
           <div class="muted">Нынешний дух.</div>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--soft);margin:.9rem 0">
+        <hr>
 
         <h2>Дополнительная информация</h2>
         <div class="muted">& Заметки!</div>
@@ -451,7 +672,7 @@
 
     </main>
 
-    <footer style="margin-top:1rem;display:flex;justify-content:space-between;align-items:center">
+    <footer>
       <div style="color:var(--muted)">(с) by Akella.</div>
       <div style="display:flex;gap:.6rem;align-items:center">
         <a class="nav-link" href="#stats">Характеристики</a>
@@ -463,106 +684,92 @@
   </div>
 
   <script>
-    // Аккордеон: базовая логика (плавная высота)
-    function toggleAcc(el){
-      const item = el.parentElement;
-      const body = item.querySelector('.acc-body');
-      const isOpen = item.classList.contains('acc-open');
-      if(isOpen){
-        // закрываем
-        body.style.height = body.scrollHeight + 'px';
-        requestAnimationFrame(()=>{ body.style.height = '0px'; item.classList.remove('acc-open'); });
-      } else {
-        // открываем
-        body.style.height = body.scrollHeight + 'px';
-        item.classList.add('acc-open');
-        // после анимации убрать фиксированную высоту
-        setTimeout(()=>{ if(item.classList.contains('acc-open')) body.style.height = 'auto'; }, 260);
-      }
-    }
-
-    // Инициализация: для открытых элементов выставим высоту
-    document.querySelectorAll('.acc-item').forEach(i=>{
-      if(i.classList.contains('acc-open')){
-        const b = i.querySelector('.acc-body'); b.style.height = b.scrollHeight + 'px';
-        setTimeout(()=>{ b.style.height = 'auto'; }, 260);
-      }
+    // ===== АККОРДЕОН =====
+    document.addEventListener('DOMContentLoaded', function() {
+      initAccordions();
+      initInventory();
+      initAddButtons();
     });
 
+    function initAccordions() {
+      document.querySelectorAll('.acc-head').forEach(head => {
+        head.addEventListener('click', function() {
+          const item = this.parentElement;
+          item.classList.toggle('acc-open');
+        });
+      });
+    }
 
+    // ===== ИНВЕНТАРЬ =====
     const inventory = document.getElementById("inventory");
-const ruby = document.getElementById("ruby");
+    const ruby = document.getElementById("ruby");
 
-// Загрузка состояния
-function loadState() {
-    const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
+    function initInventory() {
+      loadState();
+      
+      document.querySelectorAll(".item").forEach(item => {
+        item.addEventListener('click', () => toggleItem(item));
+      });
+    }
 
-    document.querySelectorAll(".item").forEach(item => {
+    function loadState() {
+      const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
+
+      document.querySelectorAll(".item").forEach(item => {
         const id = item.dataset.id;
         if (saved.includes(id)) {
-            ruby.appendChild(item);
+          ruby.appendChild(item);
         } else {
-            inventory.appendChild(item);
+          inventory.appendChild(item);
         }
-    });
+      });
 
-    updatePlaceholder();
-}
+      updatePlaceholder();
+    }
 
-// Сохранение состояния
-function saveState() {
-    const ids = [...ruby.querySelectorAll(".item")].map(i => i.dataset.id);
-    localStorage.setItem("rubyItems", JSON.stringify(ids));
-}
+    function saveState() {
+      const ids = [...ruby.querySelectorAll(".item")].map(i => i.dataset.id);
+      localStorage.setItem("rubyItems", JSON.stringify(ids));
+    }
 
-// Обновление надписи
-function updatePlaceholder() {
-    const placeholder = document.getElementById("ruby-empty");
+    function updatePlaceholder() {
+      const placeholder = document.getElementById("ruby-empty");
 
-    if (ruby.querySelector(".item")) {
+      if (ruby.querySelector(".item")) {
         if (placeholder) placeholder.remove();
-    } else {
+      } else {
         if (!placeholder) {
-            const p = document.createElement("p");
-            p.className = "muted";
-            p.id = "ruby-empty";
-            p.textContent = "Пока пусто...";
-            ruby.appendChild(p);
+          const p = document.createElement("p");
+          p.className = "muted";
+          p.id = "ruby-empty";
+          p.textContent = "Пока пусто...";
+          ruby.appendChild(p);
         }
+      }
     }
-}
 
-// Переключение по клику
-function toggleItem(item) {
-    if (item.parentElement.id === "ruby") {
+    function toggleItem(item) {
+      if (item.parentElement.id === "ruby") {
         inventory.appendChild(item);
-    } else {
+      } else {
         ruby.appendChild(item);
+      }
+
+      updatePlaceholder();
+      saveState();
     }
 
-    updatePlaceholder();
-    saveState();
-}
+    // ===== КНОПКИ ДОБАВЛЕНИЯ =====
+    function initAddButtons() {
+      document.getElementById('addInventoryBtn').addEventListener('click', addInventoryItem);
+      document.getElementById('addDetailBtn').addEventListener('click', addDetail);
+      document.getElementById('addRitualBtn').addEventListener('click', addRitual);
+      document.getElementById('addTalentBtn').addEventListener('click', addTalent);
+    }
 
-// Привязка обработчиков
-document.querySelectorAll(".item").forEach(item => {
-    item.addEventListener("click", () => toggleItem(item));
-});
-
-// Старт
-loadState();
-  </script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
+    function addInventoryItem() {
+      const newItem = document.createElement('div');
+      newItem.className = 'item';
+      newItem.dataset.id = 'new_' + Date.now();
+      newItem.innerHTML = `
+        <div style
