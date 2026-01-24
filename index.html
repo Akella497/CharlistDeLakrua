@@ -167,6 +167,7 @@
     .items{display: flex; flex-direction: column; gap: 12px;}
     .item{
       padding: 14px;
+      padding-right: 75px;
       background: var(--panel-light);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -510,6 +511,7 @@
 
         <div id="details">
           <div class="acc-item">
+            <button class="acc-delete-btn" onclick="deleteAccItem(this)">×</button>
             <div class="acc-head" onclick="toggleAcc(this)">
               <strong>Полное описание: Дневник Будущего</strong>
               <span class="tag">Подробно</span>
@@ -520,6 +522,7 @@
           </div>
 
           <div class="acc-item">
+            <button class="acc-delete-btn" onclick="deleteAccItem(this)">×</button>
             <div class="acc-head" onclick="toggleAcc(this)">
               <strong>Полное описание: Кулон «Солнце»</strong>
               <span class="tag">Подробно</span>
@@ -530,6 +533,7 @@
           </div>
 
           <div class="acc-item">
+            <button class="acc-delete-btn" onclick="deleteAccItem(this)">×</button>
             <div class="acc-head" onclick="toggleAcc(this)">
               <strong>Полное описание: Доспех Багрового Мистика</strong>
               <span class="tag">Подробно</span>
@@ -549,6 +553,7 @@
 
         <div id="rituals">
           <div class="acc-item">
+            <button class="acc-delete-btn" onclick="deleteAccItem(this)">×</button>
             <div class="acc-head" onclick="toggleAcc(this)">
               <strong>Акерия — Дух Последнего Вздоха</strong>
               <span class="tag">Подробно</span>
@@ -579,41 +584,49 @@
 
         <div id="talents">
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Лучший друг</strong>
             <div style="color:var(--muted)">+3 ед. нерушимые защиты от духа.</div>
           </div>
 
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Духовное исцеление</strong>
             <div style="color:var(--muted)">Лечение через духовность.</div>
           </div>
 
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Материальность</strong>
             <div style="color:var(--muted)">Дух способен взаимодействовать с окружением.</div>
           </div>
 
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Девять жизней</strong>
             <div style="color:var(--muted)">При получении травмы имеется возможность выбрать любую иную посредством рандомайзера.</div>
           </div>
 
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Дурные приметы</strong>
             <div style="color:var(--muted)">Бросок «Наблюдательность» осуществляется через Эмпатию.</div>
           </div>
 
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Опытный боец</strong>
             <div style="color:var(--muted)">Инициативность х2 перед боем.</div>
           </div>
 
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Изгнавший демона</strong>
             <div style="color:var(--muted)">+2 к броску влияния против дьявольщины; +2 к броску анализа против чего-либо потустороннего (дьявольщина, дьявольские символы & артефакты)</div>
           </div>
 
           <div class="talent">
+            <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
             <strong>Умиротворитель духов</strong>
             <div style="color:var(--muted)">+2 на любые неагрессивные действия по отношению к агрессивным & мстительным духам.</div>
           </div>
@@ -623,16 +636,19 @@
 
         <h2>Духи</h2>
         <div class="talent">
+          <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
           <strong>Мороу</strong>
           <div style="color:var(--muted)">Жив (?). Пожертвовал собою ради де Лакруа.</div>
         </div>
 
         <div class="talent">
+          <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
           <strong>Акерия</strong>
           <div style="color:var(--muted)">8 смекалки. Дух не получает урон по телосложению & ловкости. При гибели Акерии умирает и Люциус.</div>
         </div>
 
         <div class="talent">
+          <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
           <strong>Драугр</strong>
           <div style="color:var(--muted)">Нынешний дух.</div>
         </div>
@@ -661,6 +677,24 @@
     function toggleAcc(el) {
       const item = el.parentElement;
       item.classList.toggle('open');
+    }
+
+    // Удаление аккордеона (Детали/Ритуалы)
+    function deleteAccItem(btn) {
+      if (confirm('Удалить этот элемент?')) {
+        const item = btn.parentElement;
+        item.remove();
+        saveAllData();
+      }
+    }
+
+    // Удаление таланта/духа
+    function deleteTalent(btn) {
+      if (confirm('Удалить этот элемент?')) {
+        const item = btn.parentElement;
+        item.remove();
+        saveAllData();
+      }
     }
 
     // Удаление предмета
@@ -751,6 +785,7 @@
       newDetail.className = 'acc-item';
       newDetail.dataset.id = 'detail_' + Date.now();
       newDetail.innerHTML = `
+        <button class="acc-delete-btn" onclick="deleteAccItem(this)">×</button>
         <div class="acc-head" onclick="toggleAcc(this)">
           <strong contenteditable="true">Новая деталь</strong>
           <span class="tag">Подробно</span>
@@ -775,6 +810,7 @@
       newRitual.className = 'acc-item';
       newRitual.dataset.id = 'ritual_' + Date.now();
       newRitual.innerHTML = `
+        <button class="acc-delete-btn" onclick="deleteAccItem(this)">×</button>
         <div class="acc-head" onclick="toggleAcc(this)">
           <strong contenteditable="true">Новый ритуал</strong>
           <span class="tag">Подробно</span>
@@ -799,6 +835,7 @@
       newTalent.className = 'talent';
       newTalent.dataset.id = 'talent_' + Date.now();
       newTalent.innerHTML = `
+        <button class="talent-delete-btn" onclick="deleteTalent(this)">×</button>
         <strong contenteditable="true">Новый талант</strong>
         <div style="color:var(--muted)" contenteditable="true">Описание...</div>
       `;
