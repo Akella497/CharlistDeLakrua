@@ -204,6 +204,31 @@
       transform: scale(1.15);
     }
 
+    .delete-btn{
+      position: absolute;
+      top: 10px;
+      right: 40px;
+      background: #c94444;
+      color: #fff;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(201, 68, 68, 0.3);
+    }
+
+    .delete-btn:hover{
+      background: #e05555;
+      transform: scale(1.15);
+    }
+
     .item h3{
       font-family: 'Cinzel', serif;
       font-size: 1.1rem;
@@ -400,60 +425,70 @@
         </h2>
         <div id="inventory" class="items">
           <div class="item" data-id="gun">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Аркебуза <span class="tag">Снаряжение</span></h3>
             <p>Длинноствольное оружие — требует перезарядки. Стреляет раз в ход. 3 урона, 2 прочности.</p>
           </div>
 
           <div class="item" data-id="hidden">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Маскировочный плащ <span class="tag">Снаряжение</span></h3>
             <p>Легкая защита и бонус к проверкам скрытности (+2) при использовании. Подарок от отца.</p>
           </div>
 
           <div class="item" data-id="armor">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Доспех Багрового Мистика <span class="tag">Снаряжение</span></h3>
             <p>6 единиц прочности + прочность, зависящая от количества единиц эмпатии. -1 урон от дъяволщины и дальнобойных атак.</p>
           </div>
 
           <div class="item" data-id="book">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Дневник Будущего <span class="tag">Артефакт</span></h3>
             <p>Дарует видение ближайшего будущего.</p>
           </div>
 
           <div class="item" data-id="sun">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Кулон «Солнце» <span class="tag">Артефакт</span></h3>
             <p>Придает оружию статус <strong>огненное</strong> на 1 бросок. Можно использовать 2 раза за 2 ИРЛ дня.</p>
           </div>
 
           <div class="item" data-id="box">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Таинственная шкатулка с рунами <span class="tag">Артефакт</span></h3>
             <p>В ней заточен таинственный невидимый дух, идущий по пятам мистика.</p>
           </div>
 
           <div class="item" data-id="bat">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Бэт-крюк <span class="tag">Предмет</span></h3>
             <p>Снаряжение исчезнувшего героя, некогда сражавшегося за справедливость на улицах Города Тьмы. Даёт +2 (снаряжение) при проверках Проворства, когда персонаж хочет куда-то залезть. Кроме того, можно использовать в бою за манёвр, чтобы передвинуть персонажа до средней дистанции в высоту. Перезарядка - 2 манёвра.</p>
           </div>
 
           <div class="item" data-id="zont">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Зонт-трость рода Кроу <span class="tag">Предмет</span></h3>
             <p>+1 к влиянию при использовании вместе с шикарным костюмом. +2 к влиянию на слуг рода Кроу. Не занимает места в инвентаре.</p>
           </div>
 
           <div class="item" data-id="ody">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Дневник капитана Оди <span class="tag">Предмет</span></h3>
             <p>Дневник господина Оди с картой утонувшего корабля с различными артефактами и прочим добром. Сокровища левиафанобоев. Ведущий: fokxer.</p>
           </div>
 
           <div class="item" data-id="flashlight">
+            <button class="delete-btn" onclick="deleteItem(this)">×</button>
             <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Фонарик <span class="tag">Предмет</span></h3>
             <p>Да будет свет.</p>
@@ -628,6 +663,32 @@
       item.classList.toggle('open');
     }
 
+    // Удаление предмета
+    function deleteItem(btn) {
+      if (confirm('Удалить этот предмет?')) {
+        const item = btn.parentElement;
+        item.remove();
+        saveAllData();
+        checkRubyPlaceholder();
+      }
+    }
+
+    // Проверка плейсхолдера в Святилище
+    function checkRubyPlaceholder() {
+      const ruby = document.getElementById('ruby');
+      const items = ruby.querySelectorAll('.item');
+      const placeholder = ruby.querySelector('p');
+      
+      if (items.length === 0 && !placeholder) {
+        const p = document.createElement('p');
+        p.style.cssText = 'text-align:center;padding:30px;color:var(--muted);font-style:italic';
+        p.textContent = 'Пока пусто...';
+        ruby.appendChild(p);
+      } else if (items.length > 0 && placeholder) {
+        placeholder.remove();
+      }
+    }
+
     // Перемещение в Рубиновое Святилище
     function moveToRuby(btn) {
       const item = btn.parentElement;
@@ -635,71 +696,30 @@
       const inventory = document.getElementById('inventory');
       const placeholder = ruby.querySelector('p');
       
-      // Удаляем плейсхолдер если есть
-      if (placeholder && placeholder.textContent.includes('Пока пусто')) {
+      if (placeholder && placeholder.textContent.includes('Пусто')) {
         placeholder.remove();
       }
       
-      // Меняем кнопку на "назад"
       if (item.parentElement.id === 'inventory') {
         btn.textContent = '←';
         btn.onclick = function() { moveToInventory(this); };
         ruby.appendChild(item);
       }
       
-      saveRubyState();
+      saveAllData();
     }
 
     // Возврат в Инвентарь
     function moveToInventory(btn) {
       const item = btn.parentElement;
       const inventory = document.getElementById('inventory');
-      const ruby = document.getElementById('ruby');
       
       btn.textContent = '→';
       btn.onclick = function() { moveToRuby(this); };
       inventory.appendChild(item);
       
-      // Добавляем плейсхолдер обратно если Святилище пустое
-      if (ruby.querySelectorAll('.item').length === 0) {
-        const p = document.createElement('p');
-        p.style.cssText = 'text-align:center;padding:30px;color:var(--muted);font-style:italic';
-        p.textContent = 'Пока пусто...';
-        ruby.appendChild(p);
-      }
-      
-      saveRubyState();
-    }
-
-    // Сохранение состояния
-    function saveRubyState() {
-      const ruby = document.getElementById('ruby');
-      const rubyIds = Array.from(ruby.querySelectorAll('.item')).map(item => item.dataset.id);
-      localStorage.setItem('rubyItems', JSON.stringify(rubyIds));
-    }
-
-    // Загрузка состояния
-    function loadRubyState() {
-      const saved = localStorage.getItem('rubyItems');
-      if (!saved) return;
-      
-      const rubyIds = JSON.parse(saved);
-      const ruby = document.getElementById('ruby');
-      const placeholder = ruby.querySelector('p');
-      
-      rubyIds.forEach(id => {
-        const item = document.querySelector(`[data-id="${id}"]`);
-        if (item) {
-          const btn = item.querySelector('.move-btn');
-          btn.textContent = '←';
-          btn.onclick = function() { moveToInventory(this); };
-          ruby.appendChild(item);
-        }
-      });
-      
-      if (rubyIds.length > 0 && placeholder) {
-        placeholder.remove();
-      }
+      checkRubyPlaceholder();
+      saveAllData();
     }
 
     // Добавление предмета в инвентарь
@@ -709,11 +729,19 @@
       newItem.className = 'item';
       newItem.dataset.id = 'new_' + Date.now();
       newItem.innerHTML = `
+        <button class="delete-btn" onclick="deleteItem(this)">×</button>
         <button class="move-btn" onclick="moveToRuby(this)">→</button>
         <h3 contenteditable="true">Новый предмет <span class="tag">Предмет</span></h3>
         <p contenteditable="true">Описание...</p>
       `;
       inv.appendChild(newItem);
+      
+      // Сохранение при редактировании
+      newItem.querySelectorAll('[contenteditable]').forEach(el => {
+        el.addEventListener('blur', saveAllData);
+      });
+      
+      saveAllData();
     }
 
     // Добавление детали
@@ -721,6 +749,7 @@
       const details = document.getElementById('details');
       const newDetail = document.createElement('div');
       newDetail.className = 'acc-item';
+      newDetail.dataset.id = 'detail_' + Date.now();
       newDetail.innerHTML = `
         <div class="acc-head" onclick="toggleAcc(this)">
           <strong contenteditable="true">Новая деталь</strong>
@@ -731,6 +760,12 @@
         </div>
       `;
       details.appendChild(newDetail);
+      
+      newDetail.querySelectorAll('[contenteditable]').forEach(el => {
+        el.addEventListener('blur', saveAllData);
+      });
+      
+      saveAllData();
     }
 
     // Добавление ритуала
@@ -738,6 +773,7 @@
       const rituals = document.getElementById('rituals');
       const newRitual = document.createElement('div');
       newRitual.className = 'acc-item';
+      newRitual.dataset.id = 'ritual_' + Date.now();
       newRitual.innerHTML = `
         <div class="acc-head" onclick="toggleAcc(this)">
           <strong contenteditable="true">Новый ритуал</strong>
@@ -748,6 +784,12 @@
         </div>
       `;
       rituals.appendChild(newRitual);
+      
+      newRitual.querySelectorAll('[contenteditable]').forEach(el => {
+        el.addEventListener('blur', saveAllData);
+      });
+      
+      saveAllData();
     }
 
     // Добавление таланта
@@ -755,52 +797,173 @@
       const talents = document.getElementById('talents');
       const newTalent = document.createElement('div');
       newTalent.className = 'talent';
+      newTalent.dataset.id = 'talent_' + Date.now();
       newTalent.innerHTML = `
         <strong contenteditable="true">Новый талант</strong>
         <div style="color:var(--muted)" contenteditable="true">Описание...</div>
       `;
       talents.appendChild(newTalent);
+      
+      newTalent.querySelectorAll('[contenteditable]').forEach(el => {
+        el.addEventListener('blur', saveAllData);
+      });
+      
+      saveAllData();
     }
 
-    // Загружаем состояние при запуске
-    window.addEventListener('load', loadRubyState);
+    // Сохранение всех данных
+    function saveAllData() {
+      const data = {
+        inventory: [],
+        ruby: [],
+        details: [],
+        rituals: [],
+        talents: []
+      };
+      
+      // Инвентарь
+      document.querySelectorAll('#inventory .item').forEach(item => {
+        data.inventory.push({
+          id: item.dataset.id,
+          html: item.innerHTML
+        });
+      });
+      
+      // Рубиновое святилище
+      document.querySelectorAll('#ruby .item').forEach(item => {
+        data.ruby.push({
+          id: item.dataset.id,
+          html: item.innerHTML
+        });
+      });
+      
+      // Детали
+      document.querySelectorAll('#details .acc-item').forEach(item => {
+        if (item.dataset.id && item.dataset.id.startsWith('detail_')) {
+          data.details.push({
+            id: item.dataset.id,
+            html: item.innerHTML
+          });
+        }
+      });
+      
+      // Ритуалы
+      document.querySelectorAll('#rituals .acc-item').forEach(item => {
+        if (item.dataset.id && item.dataset.id.startsWith('ritual_')) {
+          data.rituals.push({
+            id: item.dataset.id,
+            html: item.innerHTML
+          });
+        }
+      });
+      
+      // Таланты
+      document.querySelectorAll('#talents .talent').forEach(item => {
+        if (item.dataset.id && item.dataset.id.startsWith('talent_')) {
+          data.talents.push({
+            id: item.dataset.id,
+            html: item.innerHTML
+          });
+        }
+      });
+      
+      localStorage.setItem('characterData', JSON.stringify(data));
+    }
 
+    // Загрузка всех данных
+    function loadAllData() {
+      const saved = localStorage.getItem('characterData');
+      if (!saved) return;
+      
+      const data = JSON.parse(saved);
+      
+      // Загрузка инвентаря
+      const inventory = document.getElementById('inventory');
+      data.inventory.forEach(item => {
+        const existingItem = document.querySelector(`#inventory [data-id="${item.id}"]`);
+        if (!existingItem && item.id.startsWith('new_')) {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.dataset.id = item.id;
+          div.innerHTML = item.html;
+          inventory.appendChild(div);
+          
+          div.querySelectorAll('[contenteditable]').forEach(el => {
+            el.addEventListener('blur', saveAllData);
+          });
+        }
+      });
+      
+      // Загрузка Рубинового святилища
+      const ruby = document.getElementById('ruby');
+      const placeholder = ruby.querySelector('p');
+      
+      data.ruby.forEach(item => {
+        const itemEl = document.querySelector(`[data-id="${item.id}"]`);
+        if (itemEl) {
+          const btn = itemEl.querySelector('.move-btn');
+          btn.textContent = '←';
+          btn.onclick = function() { moveToInventory(this); };
+          ruby.appendChild(itemEl);
+        }
+      });
+      
+      if (data.ruby.length > 0 && placeholder) {
+        placeholder.remove();
+      }
+      
+      // Загрузка деталей
+      const details = document.getElementById('details');
+      data.details.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'acc-item';
+        div.dataset.id = item.id;
+        div.innerHTML = item.html;
+        details.appendChild(div);
+        
+        div.querySelectorAll('[contenteditable]').forEach(el => {
+          el.addEventListener('blur', saveAllData);
+        });
+      });
+      
+      // Загрузка ритуалов
+      const rituals = document.getElementById('rituals');
+      data.rituals.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'acc-item';
+        div.dataset.id = item.id;
+        div.innerHTML = item.html;
+        rituals.appendChild(div);
+        
+        div.querySelectorAll('[contenteditable]').forEach(el => {
+          el.addEventListener('blur', saveAllData);
+        });
+      });
+      
+      // Загрузка талантов
+      const talents = document.getElementById('talents');
+      data.talents.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'talent';
+        div.dataset.id = item.id;
+        div.innerHTML = item.html;
+        talents.appendChild(div);
+        
+        div.querySelectorAll('[contenteditable]').forEach(el => {
+          el.addEventListener('blur', saveAllData);
+        });
+      });
+    }
 
-
-    function saveEditableContent() {
-    const data = [];
-    document.querySelectorAll('[contenteditable="true"]').forEach((el, i) => {
-      data.push({
-        index: i,
-        html: el.innerHTML
+    // Инициализация при загрузке
+    window.addEventListener('load', function() {
+      loadAllData();
+      
+      // Добавляем автосохранение при редактировании существующих элементов
+      document.querySelectorAll('[contenteditable]').forEach(el => {
+        el.addEventListener('blur', saveAllData);
       });
     });
-    localStorage.setItem('editableContent', JSON.stringify(data));
-  }
-
-  function loadEditableContent() {
-    const saved = localStorage.getItem('editableContent');
-    if (!saved) return;
-
-    const data = JSON.parse(saved);
-    const elements = document.querySelectorAll('[contenteditable="true"]');
-
-    data.forEach(item => {
-      if (elements[item.index]) {
-        elements[item.index].innerHTML = item.html;
-      }
-    });
-  }
-
-  // автосохранение при любом вводе
-  document.addEventListener('input', (e) => {
-    if (e.target.isContentEditable) {
-      saveEditableContent();
-    }
-  });
-
-  window.addEventListener('load', loadEditableContent);
   </script>
 </body>
 </html>
-
