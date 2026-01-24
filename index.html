@@ -8,17 +8,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #0a0a0f;
-      --panel: #1a1a24;
-      --panel-light: #252535;
-      --muted: #8b8b9a;
+      --bg: #050505;
+      --panel: #0d0d0d;
+      --panel-light: #1a1a1a;
+      --muted: #8b8b8b;
       --accent: #c9a86b;
       --accent-dark: #9d7e4a;
       --accent-bright: #e8c78a;
-      --text: #e0e0e8;
-      --border: rgba(201, 168, 107, 0.2);
+      --text: #d4d4d4;
+      --border: rgba(201, 168, 107, 0.25);
       --radius: 6px;
-      --shadow: 0 4px 20px rgba(0,0,0,0.5);
+      --shadow: 0 4px 20px rgba(0,0,0,0.8);
     }
 
     *{box-sizing: border-box; margin: 0; padding: 0;}
@@ -33,7 +33,7 @@
     .page{
       max-width: 1400px;
       margin: 0 auto;
-      background: linear-gradient(135deg, #0f0f18 0%, #1a1a24 100%);
+      background: linear-gradient(135deg, #000000 0%, #0d0d0d 100%);
       border: 2px solid var(--border);
       border-radius: 8px;
       box-shadow: var(--shadow);
@@ -41,7 +41,7 @@
     }
 
     header{
-      background: linear-gradient(135deg, #1a1a24 0%, #252535 100%);
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
       border-bottom: 2px solid var(--border);
       padding: 30px;
       display: flex;
@@ -170,14 +170,38 @@
       background: var(--panel-light);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      cursor: pointer;
       transition: all 0.3s ease;
+      position: relative;
     }
 
     .item:hover{
-      background: #2a2a3a;
+      background: #222222;
       border-color: var(--accent);
-      transform: translateY(-2px);
+    }
+
+    .move-btn{
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(201, 168, 107, 0.3);
+    }
+
+    .move-btn:hover{
+      background: var(--accent-bright);
+      transform: scale(1.15);
     }
 
     .item h3{
@@ -222,7 +246,7 @@
     }
 
     .acc-head:hover{
-      background: #2a2a3a;
+      background: #222222;
     }
 
     .acc-head strong{
@@ -251,7 +275,7 @@
     }
 
     .talent:hover{
-      background: #2a2a3a;
+      background: #222222;
       border-color: var(--accent);
       transform: translateX(4px);
     }
@@ -375,13 +399,64 @@
           <button class="add-btn" onclick="addItem()">+</button>
         </h2>
         <div id="inventory" class="items">
-          <div class="item">
+          <div class="item" data-id="gun">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Аркебуза <span class="tag">Снаряжение</span></h3>
-            <p>Длинноствольное оружие. 3 урона, 2 прочности.</p>
+            <p>Длинноствольное оружие — требует перезарядки. Стреляет раз в ход. 3 урона, 2 прочности.</p>
           </div>
-          <div class="item">
+
+          <div class="item" data-id="hidden">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
             <h3>Маскировочный плащ <span class="tag">Снаряжение</span></h3>
-            <p>Бонус к скрытности (+2).</p>
+            <p>Легкая защита и бонус к проверкам скрытности (+2) при использовании. Подарок от отца.</p>
+          </div>
+
+          <div class="item" data-id="armor">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Доспех Багрового Мистика <span class="tag">Снаряжение</span></h3>
+            <p>6 единиц прочности + прочность, зависящая от количества единиц эмпатии. -1 урон от дъяволщины и дальнобойных атак.</p>
+          </div>
+
+          <div class="item" data-id="book">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Дневник Будущего <span class="tag">Артефакт</span></h3>
+            <p>Дарует видение ближайшего будущего.</p>
+          </div>
+
+          <div class="item" data-id="sun">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Кулон «Солнце» <span class="tag">Артефакт</span></h3>
+            <p>Придает оружию статус <strong>огненное</strong> на 1 бросок. Можно использовать 2 раза за 2 ИРЛ дня.</p>
+          </div>
+
+          <div class="item" data-id="box">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Таинственная шкатулка с рунами <span class="tag">Артефакт</span></h3>
+            <p>В ней заточен таинственный невидимый дух, идущий по пятам мистика.</p>
+          </div>
+
+          <div class="item" data-id="bat">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Бэт-крюк <span class="tag">Предмет</span></h3>
+            <p>Снаряжение исчезнувшего героя, некогда сражавшегося за справедливость на улицах Города Тьмы. Даёт +2 (снаряжение) при проверках Проворства, когда персонаж хочет куда-то залезть. Кроме того, можно использовать в бою за манёвр, чтобы передвинуть персонажа до средней дистанции в высоту. Перезарядка - 2 манёвра.</p>
+          </div>
+
+          <div class="item" data-id="zont">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Зонт-трость рода Кроу <span class="tag">Предмет</span></h3>
+            <p>+1 к влиянию при использовании вместе с шикарным костюмом. +2 к влиянию на слуг рода Кроу. Не занимает места в инвентаре.</p>
+          </div>
+
+          <div class="item" data-id="ody">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Дневник капитана Оди <span class="tag">Предмет</span></h3>
+            <p>Дневник господина Оди с картой утонувшего корабля с различными артефактами и прочим добром. Сокровища левиафанобоев. Ведущий: fokxer.</p>
+          </div>
+
+          <div class="item" data-id="flashlight">
+            <button class="move-btn" onclick="moveToRuby(this)">→</button>
+            <h3>Фонарик <span class="tag">Предмет</span></h3>
+            <p>Да будет свет.</p>
           </div>
         </div>
 
@@ -401,21 +476,31 @@
         <div id="details">
           <div class="acc-item">
             <div class="acc-head" onclick="toggleAcc(this)">
-              <strong>Дневник Будущего</strong>
+              <strong>Полное описание: Дневник Будущего</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p>Привет! Это описание Дневника Будущего. Предмет показывает ближайшее будущее.</p>
+              <p>Дневник Будущего: Предмет показывает ближайшее будущее, если его пользователь продолжит идти тем же путем, что и раньше. Когда владелец открывает дневник, он может увидеть в нем заметки о грядущем возможном важном значимом событии в его жизни - большая радость, печаль, утрата, смерть, находка. Мастер обязан давать правдивый ответ о поджидающих опасностях, наградах, встречах и т.д. в текущей сцене, при условии, что действия персонажа оставались бы по своему концепту такими же. Один раз за бой и только в бою, можно использовать артефакт, чтобы рассчитать следующий бросок атаки или защиты любого типа подобно таланту ищейки "Рассчитать удар". Использовать можно без перезарядки, однако частое использование имеет негативные последствия. Первый раз обратиться к дневнику можно бесплатно. Второй раз - за 1 стресс, Третий - за 2 стресса и так далее. Счетчик обнуляется через 2 ИРЛ дня после последнего обращения к дневнику. Если пользователь после использования дневника теряет боеспособность, то он навсегда лишается 1 эмпатии.</p>
             </div>
           </div>
 
           <div class="acc-item">
             <div class="acc-head" onclick="toggleAcc(this)">
-              <strong>Кулон «Солнце»</strong>
+              <strong>Полное описание: Кулон «Солнце»</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p>Привет! Это описание кулона. 2 раза в сутки придает оружию статус «огненное».</p>
+              <p>Этот кулон мой последний подарок тому, кто зажигает пламя». 2 раза в игровые сутки (= 2 ИРЛ дня) Люциус может придать своему оружию статус «огненное» на один бросок.</p>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <div class="acc-head" onclick="toggleAcc(this)">
+              <strong>Полное описание: Доспех Багрового Мистика</strong>
+              <span class="tag">Подробно</span>
+            </div>
+            <div class="acc-body">
+              <p>Броня забытого мистика: сделана из серого металла, что переливается кровавым багрянцем, если смотреть на него под разными углами.<br><br>6 брони, -1 получаемого урона от атак дальнего боя или дьявольщины.<br><br>Добавляет к кубикам брони текущую эмпатию. При выпадении 1 на кубах характеристик при неполностью поглощенном уроне наносит урон по характеристике.</p>
             </div>
           </div>
         </div>
@@ -434,7 +519,16 @@
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p>Привет! Это описание ритуала Акерии. Духовный союз восполняет здоровье.</p>
+              <p><strong>Таланты:</strong></p>
+              <p><strong>• Духовный союз:</strong> При убийстве врага с помощью духа, находящегося в пределах ближней дистанции, Вы восполняете часть своего здоровья, напитавшись душой жертвы. Восполняемое здоровье равно половине кубов характеристики, что упала до 0 у цели (округление в меньшую сторону).</p>
+              <p><strong>• Неуязвимость к Страданию:</strong> Призрак, а теперь и Вы сами, не чувствуете боли. На Вас больше не действует запугивание, а при попытке повлиять на Вас цель получает -2 куба-модификатора к этому действию.</p>
+              <p><strong>• Последний вдох:</strong> 2 единицы урона за успех. Обычный удар духа через духовность. Каждый удар тратит 1 куб-характеристику эмпатии мистика.</p>
+              <p><strong>• Кокон из Морока:</strong> Призрак заворачивает жертву в сгусток эфирной тьмы. Жертва теряет ориентацию и более не различает, кто является союзником, а кто врагом. Приоритетной целью для него становится ближайший к жертве враг. Тратит действие на активацию таланта и 1 куб-характеристик мистика единожды. Не более 1 цели. Кокон рушится и перестает действовать после 4 ударов.</p>
+              <p><strong>• Слом Воли:</strong> Призрак может «выдернуть» одну эмоцию у цели (например: страх, надежду, ярость). Потеря эмоции ломает боевой дух. Тратит действие. Действует 1-2 хода, в зависимости от траты эмпатии Мистика (1-2).</p>
+              <p style="margin-left:20px">1. Лишение страха: Цель бросается в бой на сильнейшего врага, цель не может обороняться (бросать кубики «драки», «брони» и т.д.).</p>
+              <p style="margin-left:20px">2. Лишение надежды: Цель более не участвует в бою. Она скидывает всё свое оружие и пытается отдалится на максимально далекое расстояние.</p>
+              <p style="margin-left:20px">3. Ярость: Цель лишается всяческого смысла сражаться далее и заместо этого может лишь оказывать помощь союзникам.</p>
+              <p><strong>• Холод Древности:</strong> Призрак погружает поле боя в свою «эпоху смерти» — место и время, когда он погиб. Враги вынуждены сражаться в условиях чужой реальности, отчего каждый получает -2 куба-модификатора к каждому действию, а мистик получает +2 куба-модификатора. Тратит и действие, и маневр. Требуется концентрация Акерии каждый ход. Тратит 1 куб-характеристик эмпатии единожды.</p>
             </div>
           </div>
         </div>
@@ -453,9 +547,40 @@
             <strong>Лучший друг</strong>
             <div style="color:var(--muted)">+3 ед. нерушимые защиты от духа.</div>
           </div>
+
           <div class="talent">
             <strong>Духовное исцеление</strong>
             <div style="color:var(--muted)">Лечение через духовность.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Материальность</strong>
+            <div style="color:var(--muted)">Дух способен взаимодействовать с окружением.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Девять жизней</strong>
+            <div style="color:var(--muted)">При получении травмы имеется возможность выбрать любую иную посредством рандомайзера.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Дурные приметы</strong>
+            <div style="color:var(--muted)">Бросок «Наблюдательность» осуществляется через Эмпатию.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Опытный боец</strong>
+            <div style="color:var(--muted)">Инициативность х2 перед боем.</div>
+          </div>
+
+          <div class="talent">
+            <strong>Изгнавший демона</strong>
+            <div style="color:var(--muted)">+2 к броску влияния против дьявольщины; +2 к броску анализа против чего-либо потустороннего (дьявольщина, дьявольские символы & артефакты)</div>
+          </div>
+
+          <div class="talent">
+            <strong>Умиротворитель духов</strong>
+            <div style="color:var(--muted)">+2 на любые неагрессивные действия по отношению к агрессивным & мстительным духам.</div>
           </div>
         </div>
 
@@ -464,18 +589,35 @@
         <h2>Духи</h2>
         <div class="talent">
           <strong>Мороу</strong>
-          <div style="color:var(--muted)">Жив (?). Пожертвовал собою.</div>
+          <div style="color:var(--muted)">Жив (?). Пожертвовал собою ради де Лакруа.</div>
         </div>
+
         <div class="talent">
           <strong>Акерия</strong>
-          <div style="color:var(--muted)">8 смекалки. Дух Последнего Вздоха.</div>
+          <div style="color:var(--muted)">8 смекалки. Дух не получает урон по телосложению & ловкости. При гибели Акерии умирает и Люциус.</div>
         </div>
+
+        <div class="talent">
+          <strong>Драугр</strong>
+          <div style="color:var(--muted)">Нынешний дух.</div>
+        </div>
+
+        <hr>
+
+        <h2>Дополнительная информация</h2>
+        <div style="color:var(--muted)">& Заметки!</div>
       </aside>
 
     </main>
 
     <footer>
       <div style="color:var(--muted)">(с) by Akella.</div>
+      <div style="display:flex;gap:.6rem;align-items:center">
+        <a class="nav-link" href="#stats">Характеристики</a>
+        <a class="nav-link" href="#story">Детали</a>
+        <a class="nav-link" href="#talents">Таланты</a>
+        <a class="nav-link" href="gm.html">Лист игрового мастера</a>
+      </div>
     </footer>
   </div>
 
@@ -486,12 +628,88 @@
       item.classList.toggle('open');
     }
 
+    // Перемещение в Рубиновое Святилище
+    function moveToRuby(btn) {
+      const item = btn.parentElement;
+      const ruby = document.getElementById('ruby');
+      const inventory = document.getElementById('inventory');
+      const placeholder = ruby.querySelector('p');
+      
+      // Удаляем плейсхолдер если есть
+      if (placeholder && placeholder.textContent.includes('Пока пусто')) {
+        placeholder.remove();
+      }
+      
+      // Меняем кнопку на "назад"
+      if (item.parentElement.id === 'inventory') {
+        btn.textContent = '←';
+        btn.onclick = function() { moveToInventory(this); };
+        ruby.appendChild(item);
+      }
+      
+      saveRubyState();
+    }
+
+    // Возврат в Инвентарь
+    function moveToInventory(btn) {
+      const item = btn.parentElement;
+      const inventory = document.getElementById('inventory');
+      const ruby = document.getElementById('ruby');
+      
+      btn.textContent = '→';
+      btn.onclick = function() { moveToRuby(this); };
+      inventory.appendChild(item);
+      
+      // Добавляем плейсхолдер обратно если Святилище пустое
+      if (ruby.querySelectorAll('.item').length === 0) {
+        const p = document.createElement('p');
+        p.style.cssText = 'text-align:center;padding:30px;color:var(--muted);font-style:italic';
+        p.textContent = 'Пока пусто...';
+        ruby.appendChild(p);
+      }
+      
+      saveRubyState();
+    }
+
+    // Сохранение состояния
+    function saveRubyState() {
+      const ruby = document.getElementById('ruby');
+      const rubyIds = Array.from(ruby.querySelectorAll('.item')).map(item => item.dataset.id);
+      localStorage.setItem('rubyItems', JSON.stringify(rubyIds));
+    }
+
+    // Загрузка состояния
+    function loadRubyState() {
+      const saved = localStorage.getItem('rubyItems');
+      if (!saved) return;
+      
+      const rubyIds = JSON.parse(saved);
+      const ruby = document.getElementById('ruby');
+      const placeholder = ruby.querySelector('p');
+      
+      rubyIds.forEach(id => {
+        const item = document.querySelector(`[data-id="${id}"]`);
+        if (item) {
+          const btn = item.querySelector('.move-btn');
+          btn.textContent = '←';
+          btn.onclick = function() { moveToInventory(this); };
+          ruby.appendChild(item);
+        }
+      });
+      
+      if (rubyIds.length > 0 && placeholder) {
+        placeholder.remove();
+      }
+    }
+
     // Добавление предмета в инвентарь
     function addItem() {
       const inv = document.getElementById('inventory');
       const newItem = document.createElement('div');
       newItem.className = 'item';
+      newItem.dataset.id = 'new_' + Date.now();
       newItem.innerHTML = `
+        <button class="move-btn" onclick="moveToRuby(this)">→</button>
         <h3 contenteditable="true">Новый предмет <span class="tag">Предмет</span></h3>
         <p contenteditable="true">Описание...</p>
       `;
@@ -509,7 +727,7 @@
           <span class="tag">Подробно</span>
         </div>
         <div class="acc-body">
-          <p contenteditable="true">Привет! Описание новой детали...</p>
+          <p contenteditable="true">Описание новой детали...</p>
         </div>
       `;
       details.appendChild(newDetail);
@@ -526,7 +744,7 @@
           <span class="tag">Подробно</span>
         </div>
         <div class="acc-body">
-          <p contenteditable="true">Привет! Описание нового ритуала...</p>
+          <p contenteditable="true">Описание нового ритуала...</p>
         </div>
       `;
       rituals.appendChild(newRitual);
@@ -543,6 +761,9 @@
       `;
       talents.appendChild(newTalent);
     }
+
+    // Загружаем состояние при запуске
+    window.addEventListener('load', loadRubyState);
   </script>
 </body>
 </html>
