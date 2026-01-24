@@ -764,6 +764,43 @@
 
     // Загружаем состояние при запуске
     window.addEventListener('load', loadRubyState);
+
+
+
+    function saveEditableContent() {
+    const data = [];
+    document.querySelectorAll('[contenteditable="true"]').forEach((el, i) => {
+      data.push({
+        index: i,
+        html: el.innerHTML
+      });
+    });
+    localStorage.setItem('editableContent', JSON.stringify(data));
+  }
+
+  function loadEditableContent() {
+    const saved = localStorage.getItem('editableContent');
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+    const elements = document.querySelectorAll('[contenteditable="true"]');
+
+    data.forEach(item => {
+      if (elements[item.index]) {
+        elements[item.index].innerHTML = item.html;
+      }
+    });
+  }
+
+  // автосохранение при любом вводе
+  document.addEventListener('input', (e) => {
+    if (e.target.isContentEditable) {
+      saveEditableContent();
+    }
+  });
+
+  window.addEventListener('load', loadEditableContent);
   </script>
 </body>
 </html>
+
