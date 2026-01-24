@@ -7,7 +7,6 @@
   <link rel="icon" type="image/png" href="https://i.postimg.cc/XJSk855s/123.png">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    /* ====== ПЕРЕМЕННЫЕ ТЕМЫ ====== */
     :root{
       --bg: #0a0a0f;
       --panel: #1a1a24;
@@ -16,25 +15,21 @@
       --accent: #c9a86b;
       --accent-dark: #9d7e4a;
       --accent-bright: #e8c78a;
-      --danger: #e07b7b;
       --text: #e0e0e8;
       --border: rgba(201, 168, 107, 0.2);
       --radius: 6px;
       --shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
-    /* ====== БАЗОВЫЕ СТИЛИ ====== */
     *{box-sizing: border-box; margin: 0; padding: 0;}
     html,body{height:100%; background: var(--bg);}
     body{
       font-family: 'Merriweather', Georgia, serif;
       color: var(--text);
-      -webkit-font-smoothing: antialiased;
       line-height: 1.6;
       padding: 20px;
     }
 
-    /* ====== КОНТЕЙНЕР СТРАНИЦЫ ====== */
     .page{
       max-width: 1400px;
       margin: 0 auto;
@@ -45,7 +40,6 @@
       overflow: hidden;
     }
 
-    /* ====== HEADER ====== */
     header{
       background: linear-gradient(135deg, #1a1a24 0%, #252535 100%);
       border-bottom: 2px solid var(--border);
@@ -55,7 +49,6 @@
       align-items: center;
     }
 
-    .portrait-wrap{display: flex; gap: 20px; align-items: center;}
     .portrait{
       width: 140px;
       height: 180px;
@@ -82,7 +75,6 @@
       font-style: italic;
     }
 
-    /* ====== ГЛАВНЫЙ LAYOUT ====== */
     .container{
       display: grid;
       grid-template-columns: 360px 1fr 380px;
@@ -90,7 +82,6 @@
       padding: 30px;
     }
 
-    /* ====== ПАНЕЛИ ====== */
     .panel{
       background: var(--panel);
       border: 1px solid var(--border);
@@ -124,19 +115,14 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       box-shadow: 0 2px 8px rgba(201, 168, 107, 0.3);
     }
 
     .add-btn:hover{
       background: var(--accent-bright);
       transform: rotate(90deg) scale(1.1);
-      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.5);
     }
 
-    /* ====== ХАРАКТЕРИСТИКИ ====== */
     .stats{display: flex; flex-direction: column; gap: 12px;}
     .stat{
       display: flex;
@@ -152,7 +138,6 @@
       font-weight: 600;
       color: var(--accent);
       font-family: 'Cinzel', serif;
-      letter-spacing: 0.5px;
     }
 
     .stat .value{
@@ -164,7 +149,6 @@
       text-align: center;
       font-weight: 700;
       font-family: 'Cinzel', serif;
-      box-shadow: 0 2px 8px rgba(201, 168, 107, 0.3);
     }
 
     .bar{
@@ -180,12 +164,8 @@
       background: linear-gradient(90deg, var(--accent-dark), var(--accent-bright));
     }
 
-    /* ====== ПРЕДМЕТЫ ====== */
     .items{display: flex; flex-direction: column; gap: 12px;}
     .item{
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
       padding: 14px;
       background: var(--panel-light);
       border: 1px solid var(--border);
@@ -198,7 +178,6 @@
       background: #2a2a3a;
       border-color: var(--accent);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.2);
     }
 
     .item h3{
@@ -211,7 +190,6 @@
     .item p{
       color: var(--muted);
       font-size: 0.9rem;
-      line-height: 1.5;
     }
 
     .tag{
@@ -226,14 +204,12 @@
       margin-left: 8px;
     }
 
-    /* ====== АККОРДЕОН ====== */
-    .accordion{margin-top: 16px;}
     .acc-item{
       border: 1px solid var(--border);
       border-radius: var(--radius);
       margin-bottom: 12px;
-      overflow: hidden;
       background: var(--panel-light);
+      overflow: hidden;
     }
 
     .acc-head{
@@ -256,18 +232,15 @@
     }
 
     .acc-body{
-      max-height: 0;
-      overflow: hidden;
-      padding: 0 14px;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-    }
-
-    .acc-item.acc-open .acc-body{
-      max-height: 2000px;
+      display: none;
       padding: 14px;
+      color: var(--muted);
     }
 
-    /* ====== ТАЛАНТЫ ====== */
+    .acc-item.open .acc-body{
+      display: block;
+    }
+
     .talent{
       padding: 14px;
       background: var(--panel-light);
@@ -281,7 +254,6 @@
       background: #2a2a3a;
       border-color: var(--accent);
       transform: translateX(4px);
-      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.2);
     }
 
     .talent strong{
@@ -292,12 +264,6 @@
       margin-bottom: 6px;
     }
 
-    .talent .muted{
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    /* ====== КНОПКИ ====== */
     .btn-characters{
       display: inline-block;
       margin-top: 24px;
@@ -309,16 +275,13 @@
       border-radius: var(--radius);
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(201, 168, 107, 0.3);
     }
 
     .btn-characters:hover{
       background: linear-gradient(135deg, var(--accent), var(--accent-bright));
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(201, 168, 107, 0.4);
     }
 
-    /* ====== FOOTER ====== */
     footer{
       padding: 20px 30px;
       border-top: 2px solid var(--border);
@@ -343,10 +306,8 @@
     .nav-link:hover{
       background: var(--accent);
       color: #000;
-      border-color: var(--accent);
     }
 
-    /* ====== HR ====== */
     hr{
       border: none;
       height: 1px;
@@ -354,59 +315,27 @@
       margin: 20px 0;
     }
 
-    /* ====== ПЛЕЙСХОЛДЕР ====== */
-    #ruby-empty{
-      text-align: center;
-      padding: 30px;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* ====== РЕСПОНСИВ ====== */
     @media (max-width: 1200px){
       .container{grid-template-columns: 1fr;}
-      h1{font-size: 1.8rem;}
-    }
-
-    /* ====== SCROLLBAR ====== */
-    ::-webkit-scrollbar{width: 12px; height: 12px;}
-    ::-webkit-scrollbar-track{background: var(--panel);}
-    ::-webkit-scrollbar-thumb{
-      background: linear-gradient(180deg, var(--accent-dark), var(--accent));
-      border-radius: 6px;
-    }
-    ::-webkit-scrollbar-thumb:hover{
-      background: var(--accent-bright);
-    }
-
-    /* ====== АНИМАЦИЯ ====== */
-    .fade-in{animation: fadeIn 0.6s ease both;}
-    @keyframes fadeIn{
-      from{opacity: 0; transform: translateY(20px);}
-      to{opacity: 1; transform: none;}
     }
   </style>
 </head>
 <body>
-  <div class="page fade-in" role="main">
+  <div class="page">
     <header>
-      <div class="portrait-wrap">
-        <img class="portrait" src="https://i.ibb.co/0RRSGwVj/image.png" alt="Портрет Люциус">
+      <div>
+        <img class="portrait" src="https://i.ibb.co/0RRSGwVj/image.png" alt="Портрет">
       </div>
       <div style="flex:1">
         <h1>Люциус де Лакруа</h1>
         <div class="sub">Акоросец · Фракция: Пламенный Круг · Мистик</div>
         <div style="margin-top:12px;color:var(--muted);font-style:italic">• Некоторые духи будут милее людей •</div>
       </div>
-      <div style="text-align:right;color:var(--muted);font-size:0.9rem">
-        Создано: 07.12.2025
-      </div>
     </header>
 
-    <main class="container" aria-label="Character sheet">
+    <main class="container">
 
-      <!-- ========== ЛЕВАЯ КОЛОНКА ========== -->
-      <section class="panel" id="stats">
+      <section class="panel">
         <h2>Характеристики</h2>
         <div class="stats">
           <div class="stat">
@@ -416,7 +345,6 @@
               <div class="bar"><i style="width:50%"></i></div>
             </div>
           </div>
-
           <div class="stat">
             <div class="label">Ловкость</div>
             <div style="text-align:right">
@@ -424,7 +352,6 @@
               <div class="bar"><i style="width:75%"></i></div>
             </div>
           </div>
-
           <div class="stat">
             <div class="label">Смекалка</div>
             <div style="text-align:right">
@@ -432,7 +359,6 @@
               <div class="bar"><i style="width:25%"></i></div>
             </div>
           </div>
-
           <div class="stat">
             <div class="label">Эмпатия</div>
             <div style="text-align:right">
@@ -446,203 +372,90 @@
 
         <h2>
           Инвентарь 
-          <button class="add-btn" id="addInventoryBtn">+</button>
+          <button class="add-btn" onclick="addItem()">+</button>
         </h2>
         <div id="inventory" class="items">
-
-          <div class="item" data-id="gun">
-            <div style="flex:1">
-              <h3>Аркебуза <span class="tag">Снаряжение</span></h3>
-              <p>Длинноствольное оружие — требует перезарядки. Стреляет раз в ход. 3 урона, 2 прочности.</p>
-            </div>
+          <div class="item">
+            <h3>Аркебуза <span class="tag">Снаряжение</span></h3>
+            <p>Длинноствольное оружие. 3 урона, 2 прочности.</p>
           </div>
-
-          <div class="item" data-id="hidden">
-            <div style="flex:1">
-              <h3>Маскировочный плащ <span class="tag">Снаряжение</span></h3>
-              <p>Легкая защита и бонус к проверкам скрытности (+2) при использовании. Подарок от отца.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="armor">
-            <div style="flex:1">
-              <h3>Доспех Багрового Мистика <span class="tag">Снаряжение</span></h3>
-              <p>6 единиц прочности + прочность, зависящая от количества единиц эмпатии. -1 урон от дъяволщины и дальнобойных атак.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="book">
-            <div style="flex:1">
-              <h3>Дневник Будущего <span class="tag">Артефакт</span></h3>
-              <p>Дарует видение ближайшего будущего.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="sun">
-            <div style="flex:1">
-              <h3>Кулон «Солнце» <span class="tag">Артефакт</span></h3>
-              <p>Придает оружию статус <strong>огненное</strong> на 1 бросок. Можно использовать 2 раза за 2 ИРЛ дня.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="box">
-            <div style="flex:1">
-              <h3>Таинственная шкатулка с рунами <span class="tag">Артефакт</span></h3>
-              <p>В ней заточен таинственный невидимый дух, идущий по пятам мистика.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="bat">
-            <div style="flex:1">
-              <h3>Бэт-крюк <span class="tag">Предмет</span></h3>
-              <p>Снаряжение исчезнувшего героя, некогда сражавшегося за справедливость на улицах Города Тьмы.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="zont">
-            <div style="flex:1">
-              <h3>Зонт-трость рода Кроу <span class="tag">Предмет</span></h3>
-              <p>+1 к влиянию при использовании вместе с шикарным костюмом. +2 к влиянию на слуг рода Кроу.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="ody">
-            <div style="flex:1">
-              <h3>Дневник капитана Оди <span class="tag">Предмет</span></h3>
-              <p>Дневник господина Оди с картой утонувшего корабля с различными артефактами.</p>
-            </div>
-          </div>
-
-          <div class="item" data-id="flashlight">
-            <div style="flex:1">
-              <h3>Фонарик <span class="tag">Предмет</span></h3>
-              <p>Да будет свет.</p>
-            </div>
+          <div class="item">
+            <h3>Маскировочный плащ <span class="tag">Снаряжение</span></h3>
+            <p>Бонус к скрытности (+2).</p>
           </div>
         </div>
 
         <h2 style="margin-top:2rem">Рубиновое Святилище</h2>
         <div id="ruby" class="items" style="min-height:60px">
-          <p id="ruby-empty">Пока пусто...</p>
+          <p style="text-align:center;padding:30px;color:var(--muted);font-style:italic">Пока пусто...</p>
         </div>
-
       </section>
 
-      <!-- ========== ЦЕНТРАЛЬНАЯ КОЛОНКА ========== -->
-      <section class="panel" id="story">
+      <section class="panel">
         <h2>
           Детали 
-          <button class="add-btn" id="addDetailBtn">+</button>
+          <button class="add-btn" onclick="addDetail()">+</button>
         </h2>
         <p style="color:var(--muted)">Информация об уникальных предметах.</p>
 
-        <div class="accordion" id="detailsAccordion">
-
+        <div id="details">
           <div class="acc-item">
-            <div class="acc-head">
-              <strong>Полное описание: Дневник Будущего</strong>
+            <div class="acc-head" onclick="toggleAcc(this)">
+              <strong>Дневник Будущего</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p style="color:var(--muted)">Привет! Дневник Будущего: Предмет показывает ближайшее будущее, если его пользователь продолжит идти тем же путем, что и раньше.</p>
+              <p>Привет! Это описание Дневника Будущего. Предмет показывает ближайшее будущее.</p>
             </div>
           </div>
 
           <div class="acc-item">
-            <div class="acc-head">
-              <strong>Полное описание: Кулон «Солнце»</strong>
+            <div class="acc-head" onclick="toggleAcc(this)">
+              <strong>Кулон «Солнце»</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <p style="color:var(--muted)">Привет! Этот кулон мой последний подарок тому, кто зажигает пламя. 2 раза в игровые сутки Люциус может придать своему оружию статус «огненное» на один бросок.</p>
+              <p>Привет! Это описание кулона. 2 раза в сутки придает оружию статус «огненное».</p>
             </div>
           </div>
-
-          <div class="acc-item">
-            <div class="acc-head">
-              <strong>Полное описание: Доспех Багрового Мистика</strong>
-              <span class="tag">Подробно</span>
-            </div>
-            <div class="acc-body">
-              <p style="color:var(--muted)">Привет! Броня забытого мистика: сделана из серого металла, что переливается кровавым багрянцем.</p>
-            </div>
-          </div>
-
         </div>
 
         <hr>
 
         <h2>
           Ритуалы 
-          <button class="add-btn" id="addRitualBtn">+</button>
+          <button class="add-btn" onclick="addRitual()">+</button>
         </h2>
-        <p style="color:var(--muted);margin-bottom:16px">Подробное описание доступных ритуалов и стоимость их использования.</p>
 
-        <div id="ritualsAccordion">
+        <div id="rituals">
           <div class="acc-item">
-            <div class="acc-head">
+            <div class="acc-head" onclick="toggleAcc(this)">
               <strong>Акерия — Дух Последнего Вздоха</strong>
               <span class="tag">Подробно</span>
             </div>
             <div class="acc-body">
-              <div style="color:var(--muted)">
-                <p>Привет! Таланты духа Акерии:</p>
-                <p><strong>• Духовный союз:</strong> При убийстве врага восполняете часть здоровья.</p>
-                <p><strong>• Неуязвимость к Страданию:</strong> Не чувствуете боли.</p>
-              </div>
+              <p>Привет! Это описание ритуала Акерии. Духовный союз восполняет здоровье.</p>
             </div>
           </div>
         </div>
 
-        <a class="btn-characters" href="characters.html">Знакомые персонажи</a>
+        <a class="btn-characters" href="#">Знакомые персонажи</a>
       </section>
 
-      <!-- ========== ПРАВАЯ КОЛОНКА ========== -->
-      <aside class="panel" id="talents">
+      <aside class="panel">
         <h2>
           Таланты 
-          <button class="add-btn" id="addTalentBtn">+</button>
+          <button class="add-btn" onclick="addTalent()">+</button>
         </h2>
 
-        <div id="talentsList">
+        <div id="talents">
           <div class="talent">
             <strong>Лучший друг</strong>
-            <div class="muted">+3 ед. нерушимые защиты от духа.</div>
+            <div style="color:var(--muted)">+3 ед. нерушимые защиты от духа.</div>
           </div>
-
           <div class="talent">
             <strong>Духовное исцеление</strong>
-            <div class="muted">Лечение через духовность.</div>
-          </div>
-
-          <div class="talent">
-            <strong>Материальность</strong>
-            <div class="muted">Дух способен взаимодействовать с окружением.</div>
-          </div>
-
-          <div class="talent">
-            <strong>Девять жизней</strong>
-            <div class="muted">При получении травмы имеется возможность выбрать любую иную посредством рандомайзера.</div>
-          </div>
-
-          <div class="talent">
-            <strong>Дурные приметы</strong>
-            <div class="muted">Бросок «Наблюдательность» осуществляется через Эмпатию.</div>
-          </div>
-
-          <div class="talent">
-            <strong>Опытный боец</strong>
-            <div class="muted">Инициативность х2 перед боем.</div>
-          </div>
-
-          <div class="talent">
-            <strong>Изгнавший демона</strong>
-            <div class="muted">+2 к броску влияния против дьявольщины.</div>
-          </div>
-
-          <div class="talent">
-            <strong>Умиротворитель духов</strong>
-            <div class="muted">+2 на любые неагрессивные действия по отношению к духам.</div>
+            <div style="color:var(--muted)">Лечение через духовность.</div>
           </div>
         </div>
 
@@ -651,125 +464,85 @@
         <h2>Духи</h2>
         <div class="talent">
           <strong>Мороу</strong>
-          <div class="muted">Жив (?). Пожертвовал собою ради де Лакруа.</div>
+          <div style="color:var(--muted)">Жив (?). Пожертвовал собою.</div>
         </div>
-
         <div class="talent">
           <strong>Акерия</strong>
-          <div class="muted">8 смекалки. Дух не получает урон по телосложению & ловкости.</div>
+          <div style="color:var(--muted)">8 смекалки. Дух Последнего Вздоха.</div>
         </div>
-
-        <div class="talent">
-          <strong>Драугр</strong>
-          <div class="muted">Нынешний дух.</div>
-        </div>
-
-        <hr>
-
-        <h2>Дополнительная информация</h2>
-        <div class="muted">& Заметки!</div>
       </aside>
 
     </main>
 
     <footer>
       <div style="color:var(--muted)">(с) by Akella.</div>
-      <div style="display:flex;gap:.6rem;align-items:center">
-        <a class="nav-link" href="#stats">Характеристики</a>
-        <a class="nav-link" href="#story">Детали</a>
-        <a class="nav-link" href="#talents">Таланты</a>
-        <a class="nav-link" href="gm.html">Лист игрового мастера</a>
-      </div>
     </footer>
   </div>
 
   <script>
-    // ===== АККОРДЕОН =====
-    document.addEventListener('DOMContentLoaded', function() {
-      initAccordions();
-      initInventory();
-      initAddButtons();
-    });
-
-    function initAccordions() {
-      document.querySelectorAll('.acc-head').forEach(head => {
-        head.addEventListener('click', function() {
-          const item = this.parentElement;
-          item.classList.toggle('acc-open');
-        });
-      });
+    // Аккордеон
+    function toggleAcc(el) {
+      const item = el.parentElement;
+      item.classList.toggle('open');
     }
 
-    // ===== ИНВЕНТАРЬ =====
-    const inventory = document.getElementById("inventory");
-    const ruby = document.getElementById("ruby");
-
-    function initInventory() {
-      loadState();
-      
-      document.querySelectorAll(".item").forEach(item => {
-        item.addEventListener('click', () => toggleItem(item));
-      });
-    }
-
-    function loadState() {
-      const saved = JSON.parse(localStorage.getItem("rubyItems") || "[]");
-
-      document.querySelectorAll(".item").forEach(item => {
-        const id = item.dataset.id;
-        if (saved.includes(id)) {
-          ruby.appendChild(item);
-        } else {
-          inventory.appendChild(item);
-        }
-      });
-
-      updatePlaceholder();
-    }
-
-    function saveState() {
-      const ids = [...ruby.querySelectorAll(".item")].map(i => i.dataset.id);
-      localStorage.setItem("rubyItems", JSON.stringify(ids));
-    }
-
-    function updatePlaceholder() {
-      const placeholder = document.getElementById("ruby-empty");
-
-      if (ruby.querySelector(".item")) {
-        if (placeholder) placeholder.remove();
-      } else {
-        if (!placeholder) {
-          const p = document.createElement("p");
-          p.className = "muted";
-          p.id = "ruby-empty";
-          p.textContent = "Пока пусто...";
-          ruby.appendChild(p);
-        }
-      }
-    }
-
-    function toggleItem(item) {
-      if (item.parentElement.id === "ruby") {
-        inventory.appendChild(item);
-      } else {
-        ruby.appendChild(item);
-      }
-
-      updatePlaceholder();
-      saveState();
-    }
-
-    // ===== КНОПКИ ДОБАВЛЕНИЯ =====
-    function initAddButtons() {
-      document.getElementById('addInventoryBtn').addEventListener('click', addInventoryItem);
-      document.getElementById('addDetailBtn').addEventListener('click', addDetail);
-      document.getElementById('addRitualBtn').addEventListener('click', addRitual);
-      document.getElementById('addTalentBtn').addEventListener('click', addTalent);
-    }
-
-    function addInventoryItem() {
+    // Добавление предмета в инвентарь
+    function addItem() {
+      const inv = document.getElementById('inventory');
       const newItem = document.createElement('div');
       newItem.className = 'item';
-      newItem.dataset.id = 'new_' + Date.now();
       newItem.innerHTML = `
-        <div style
+        <h3 contenteditable="true">Новый предмет <span class="tag">Предмет</span></h3>
+        <p contenteditable="true">Описание...</p>
+      `;
+      inv.appendChild(newItem);
+    }
+
+    // Добавление детали
+    function addDetail() {
+      const details = document.getElementById('details');
+      const newDetail = document.createElement('div');
+      newDetail.className = 'acc-item';
+      newDetail.innerHTML = `
+        <div class="acc-head" onclick="toggleAcc(this)">
+          <strong contenteditable="true">Новая деталь</strong>
+          <span class="tag">Подробно</span>
+        </div>
+        <div class="acc-body">
+          <p contenteditable="true">Привет! Описание новой детали...</p>
+        </div>
+      `;
+      details.appendChild(newDetail);
+    }
+
+    // Добавление ритуала
+    function addRitual() {
+      const rituals = document.getElementById('rituals');
+      const newRitual = document.createElement('div');
+      newRitual.className = 'acc-item';
+      newRitual.innerHTML = `
+        <div class="acc-head" onclick="toggleAcc(this)">
+          <strong contenteditable="true">Новый ритуал</strong>
+          <span class="tag">Подробно</span>
+        </div>
+        <div class="acc-body">
+          <p contenteditable="true">Привет! Описание нового ритуала...</p>
+        </div>
+      `;
+      rituals.appendChild(newRitual);
+    }
+
+    // Добавление таланта
+    function addTalent() {
+      const talents = document.getElementById('talents');
+      const newTalent = document.createElement('div');
+      newTalent.className = 'talent';
+      newTalent.innerHTML = `
+        <strong contenteditable="true">Новый талант</strong>
+        <div style="color:var(--muted)" contenteditable="true">Описание...</div>
+      `;
+      talents.appendChild(newTalent);
+    }
+  </script>
+</body>
+</html>
