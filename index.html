@@ -683,6 +683,17 @@
     function deleteAccItem(btn) {
       if (confirm('Удалить этот элемент?')) {
         const item = btn.parentElement;
+        const itemId = item.dataset.id;
+        
+        // Добавляем в список удалённых только если есть ID
+        if (itemId) {
+          let deleted = JSON.parse(localStorage.getItem('deletedItems') || '[]');
+          if (!deleted.includes(itemId)) {
+            deleted.push(itemId);
+            localStorage.setItem('deletedItems', JSON.stringify(deleted));
+          }
+        }
+        
         item.remove();
         saveAllData();
       }
@@ -692,6 +703,17 @@
     function deleteTalent(btn) {
       if (confirm('Удалить этот элемент?')) {
         const item = btn.parentElement;
+        const itemId = item.dataset.id;
+        
+        // Добавляем в список удалённых только если есть ID
+        if (itemId) {
+          let deleted = JSON.parse(localStorage.getItem('deletedItems') || '[]');
+          if (!deleted.includes(itemId)) {
+            deleted.push(itemId);
+            localStorage.setItem('deletedItems', JSON.stringify(deleted));
+          }
+        }
+        
         item.remove();
         saveAllData();
       }
@@ -701,6 +723,15 @@
     function deleteItem(btn) {
       if (confirm('Удалить этот предмет?')) {
         const item = btn.parentElement;
+        const itemId = item.dataset.id;
+        
+        // Добавляем в список удалённых
+        let deleted = JSON.parse(localStorage.getItem('deletedItems') || '[]');
+        if (!deleted.includes(itemId)) {
+          deleted.push(itemId);
+          localStorage.setItem('deletedItems', JSON.stringify(deleted));
+        }
+        
         item.remove();
         saveAllData();
         checkRubyPlaceholder();
@@ -1005,6 +1036,16 @@
 
     // Инициализация при загрузке
     window.addEventListener('load', function() {
+      // Сначала удаляем элементы из списка удалённых
+      const deleted = JSON.parse(localStorage.getItem('deletedItems') || '[]');
+      deleted.forEach(id => {
+        const element = document.querySelector(`[data-id="${id}"]`);
+        if (element) {
+          element.remove();
+        }
+      });
+      
+      // Затем загружаем сохранённые данные
       loadAllData();
       
       // Добавляем автосохранение при редактировании существующих элементов
