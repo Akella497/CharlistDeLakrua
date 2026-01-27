@@ -925,9 +925,12 @@
           div.innerHTML = item.html;
           inventory.appendChild(div);
           
+          // Восстанавливаем обработчики
           div.querySelectorAll('[contenteditable]').forEach(el => {
             el.addEventListener('blur', saveAllData);
           });
+          div.querySelector('.delete-btn').onclick = function() { deleteItem(this); };
+          div.querySelector('.move-btn').onclick = function() { moveToRuby(this); };
         }
       });
       
@@ -958,9 +961,12 @@
         div.innerHTML = item.html;
         details.appendChild(div);
         
+        // Восстанавливаем обработчики
         div.querySelectorAll('[contenteditable]').forEach(el => {
           el.addEventListener('blur', saveAllData);
         });
+        div.querySelector('.acc-delete-btn').onclick = function() { deleteAccItem(this); };
+        div.querySelector('.acc-head').onclick = function() { toggleAcc(this); };
       });
       
       // Загрузка ритуалов
@@ -972,9 +978,12 @@
         div.innerHTML = item.html;
         rituals.appendChild(div);
         
+        // Восстанавливаем обработчики
         div.querySelectorAll('[contenteditable]').forEach(el => {
           el.addEventListener('blur', saveAllData);
         });
+        div.querySelector('.acc-delete-btn').onclick = function() { deleteAccItem(this); };
+        div.querySelector('.acc-head').onclick = function() { toggleAcc(this); };
       });
       
       // Загрузка талантов
@@ -986,9 +995,11 @@
         div.innerHTML = item.html;
         talents.appendChild(div);
         
+        // Восстанавливаем обработчики
         div.querySelectorAll('[contenteditable]').forEach(el => {
           el.addEventListener('blur', saveAllData);
         });
+        div.querySelector('.talent-delete-btn').onclick = function() { deleteTalent(this); };
       });
     }
 
