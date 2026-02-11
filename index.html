@@ -9,93 +9,108 @@
   <style>
     :root{
       --bg: #050505;
-      --panel: #0d0d0d;
+      --panel: #101010;
       --panel-light: #1a1a1a;
-      --muted: #8b8b8b;
+      --muted: #9d9d9d;
       --accent: #c9a86b;
       --accent-dark: #9d7e4a;
-      --accent-bright: #e8c78a;
-      --text: #d4d4d4;
-      --border: rgba(201, 168, 107, 0.25);
-      --radius: 6px;
-      --shadow: 0 4px 20px rgba(0,0,0,0.8);
+      --accent-bright: #efd8a9;
+      --text: #e2ddd0;
+      --border: rgba(201, 168, 107, 0.24);
+      --radius: 10px;
+      --shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
     }
 
     *{box-sizing: border-box; margin: 0; padding: 0;}
-    html,body{height:100%; background: var(--bg);}
+
+    html,
+    body{
+      min-height:100%;
+      background: var(--bg);
+    }
+
     body{
       font-family: 'Merriweather', Georgia, serif;
       color: var(--text);
-      line-height: 1.6;
-      padding: 20px;
+      line-height: 1.65;
+      padding: clamp(12px, 2vw, 24px);
     }
 
     .page{
       max-width: 1400px;
       margin: 0 auto;
-      background: linear-gradient(135deg, #000000 0%, #0d0d0d 100%);
-      border: 2px solid var(--border);
-      border-radius: 8px;
+      background: #0f0f0f;
+      border: 1px solid var(--border);
+      border-radius: 14px;
       box-shadow: var(--shadow);
       overflow: hidden;
+      position: relative;
+      color: var(--text);
     }
 
     header{
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-      border-bottom: 2px solid var(--border);
-      padding: 30px;
+      position: relative;
+      background: #141414;
+      border-bottom: 1px solid var(--border);
+      padding: clamp(18px, 3vw, 34px);
       display: flex;
-      gap: 20px;
+      gap: clamp(16px, 2vw, 28px);
       align-items: center;
     }
 
     .portrait{
-      width: 140px;
-      height: 180px;
+      width: 152px;
+      height: 194px;
       object-fit: cover;
       border-radius: var(--radius);
-      border: 3px solid var(--accent);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      border: 2px solid var(--accent);
+      box-shadow: 0 12px 34px rgba(0,0,0,0.64);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .portrait:hover{
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.78);
     }
 
     h1{
       font-family: 'Cinzel', serif;
-      font-size: 2.2rem;
+      font-size: clamp(1.7rem, 2.4vw, 2.5rem);
       font-weight: 900;
       color: var(--accent);
       letter-spacing: 2px;
       margin-bottom: 8px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
     }
 
     .sub{
       color: var(--muted);
-      font-size: 1rem;
+      font-size: .98rem;
       font-family: 'Merriweather', serif;
       font-style: italic;
     }
 
     .container{
       display: grid;
-      grid-template-columns: 360px 1fr 380px;
-      gap: 20px;
-      padding: 30px;
+      grid-template-columns: minmax(280px, 360px) minmax(320px, 1fr) minmax(300px, 380px);
+      gap: 18px;
+      padding: clamp(16px, 2vw, 30px);
     }
 
     .panel{
-      background: var(--panel);
+      background: linear-gradient(180deg, rgba(24,24,24,.95) 0%, rgba(15,15,15,.95) 100%);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
+      padding: clamp(16px, 2vw, 24px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 8px 24px rgba(0,0,0,.42);
     }
 
     .panel h2{
       font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
       letter-spacing: 1px;
@@ -104,39 +119,57 @@
       align-items: center;
     }
 
-    .add-btn{
-      background: var(--accent);
-      color: #000;
+    .add-btn,
+    .move-btn,
+    .delete-btn,
+    .acc-delete-btn,
+    .talent-delete-btn{
       border: none;
-      width: 28px;
-      height: 28px;
       border-radius: 50%;
-      font-size: 1.3rem;
-      font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(201, 168, 107, 0.3);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .add-btn{
+      background: linear-gradient(145deg, var(--accent), var(--accent-bright));
+      color: #111;
+      width: 30px;
+      height: 30px;
+      font-size: 1.3rem;
+      box-shadow: 0 3px 9px rgba(201, 168, 107, 0.33);
     }
 
     .add-btn:hover{
-      background: var(--accent-bright);
-      transform: rotate(90deg) scale(1.1);
+      transform: rotate(90deg) scale(1.08);
+      filter: saturate(1.1);
     }
 
-    .stats{display: flex; flex-direction: column; gap: 12px;}
+    .stats{display: flex; flex-direction: column; gap: 10px;}
+
     .stat{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       padding: 12px;
-      background: var(--panel-light);
+      background: linear-gradient(160deg, rgba(29,29,29,.95), rgba(18,18,18,.9));
       border: 1px solid var(--border);
       border-radius: var(--radius);
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    .stat:hover{
+      border-color: rgba(239, 216, 169, 0.45);
+      transform: translateY(-1px);
     }
 
     .stat .label{
       font-weight: 600;
-      color: var(--accent);
+      color: var(--accent-bright);
       font-family: 'Cinzel', serif;
     }
 
@@ -144,8 +177,8 @@
       background: linear-gradient(135deg, var(--accent-dark), var(--accent));
       color: #000;
       padding: 6px 14px;
-      border-radius: var(--radius);
-      min-width: 40px;
+      border-radius: 6px;
+      min-width: 42px;
       text-align: center;
       font-weight: 700;
       font-family: 'Cinzel', serif;
@@ -153,192 +186,193 @@
 
     .bar{
       height: 6px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 3px;
+      background: rgba(255,255,255,0.09);
+      border-radius: 99px;
       overflow: hidden;
-      margin-top: 6px;
+      margin-top: 7px;
     }
+
     .bar > i{
       display: block;
       height: 100%;
       background: linear-gradient(90deg, var(--accent-dark), var(--accent-bright));
     }
 
-    .items{display: flex; flex-direction: column; gap: 12px;}
-    .item{
-      padding: 14px;
-      padding-right: 75px;
-      background: var(--panel-light);
+    .items{display: flex; flex-direction: column; gap: 10px;}
+
+    .item,
+    .talent,
+    .acc-item{
+      background: linear-gradient(170deg, rgba(29,29,29,.94), rgba(19,19,19,.95));
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      transition: all 0.3s ease;
-      position: relative;
     }
 
-    .item:hover{
-      background: #222222;
-      border-color: var(--accent);
+    .item{
+      padding: 14px 78px 14px 14px;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .item:hover,
+    .talent:hover,
+    .acc-head:hover{
+      border-color: rgba(239, 216, 169, 0.5);
+      background: #242424;
+    }
+
+    .move-btn,
+    .delete-btn,
+    .acc-delete-btn,
+    .talent-delete-btn{
+      position: absolute;
+      top: 10px;
+      width: 24px;
+      height: 24px;
+      font-size: .95rem;
+      line-height: 1;
     }
 
     .move-btn{
-      position: absolute;
-      top: 10px;
       right: 10px;
       background: var(--accent);
       color: #000;
-      border: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       box-shadow: 0 2px 6px rgba(201, 168, 107, 0.3);
     }
 
-    .move-btn:hover{
-      background: var(--accent-bright);
-      transform: scale(1.15);
-    }
+    .move-btn:hover{ background: var(--accent-bright); transform: scale(1.12); }
 
-    .delete-btn{
-      position: absolute;
-      top: 10px;
+    .delete-btn,
+    .acc-delete-btn,
+    .talent-delete-btn{
       right: 40px;
-      background: #c94444;
+      background: linear-gradient(150deg, #d45151, #a32d2d);
       color: #fff;
-      border: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      font-size: 0.9rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 6px rgba(201, 68, 68, 0.3);
+      box-shadow: 0 6px 14px rgba(201, 68, 68, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
 
-    .delete-btn:hover{
-      background: #e05555;
-      transform: scale(1.15);
+    .acc-delete-btn{ top: 12px; right: 12px; }
+
+    .talent-delete-btn{ top: 12px; right: 12px; }
+
+    .delete-btn:hover,
+    .acc-delete-btn:hover,
+    .talent-delete-btn:hover{
+      background: linear-gradient(150deg, #ea5f5f, #b33434);
+      transform: translateY(-1px) scale(1.08);
+      box-shadow: 0 8px 16px rgba(201, 68, 68, 0.44);
+    }
+
+    .delete-btn:active,
+    .acc-delete-btn:active,
+    .talent-delete-btn:active{
+      transform: scale(0.96);
     }
 
     .item h3{
       font-family: 'Cinzel', serif;
-      font-size: 1.1rem;
+      font-size: 1.04rem;
       color: var(--accent-bright);
       margin-bottom: 4px;
+      padding-right: 4px;
     }
 
-    .item p{
+    .item p,
+    .acc-body,
+    .talent p{
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
     }
 
     .tag{
       display: inline-block;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       padding: 3px 8px;
-      border-radius: 3px;
-      background: rgba(201, 168, 107, 0.15);
+      border-radius: 999px;
+      background: rgba(201, 168, 107, 0.12);
       border: 1px solid var(--accent);
-      color: var(--accent);
+      color: var(--accent-bright);
       font-family: 'Cinzel', serif;
       margin-left: 8px;
+      vertical-align: middle;
     }
 
     .acc-item{
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
       margin-bottom: 12px;
-      background: var(--panel-light);
       overflow: hidden;
+      position: relative;
     }
 
     .acc-head{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
       padding: 14px;
+      padding-right: 44px;
       cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .acc-head:hover{
-      background: #222222;
+      transition: background 0.24s ease;
     }
 
     .acc-head strong{
       font-family: 'Cinzel', serif;
       color: var(--accent);
-      font-size: 1.05rem;
+      font-size: 1.02rem;
     }
 
     .acc-body{
       display: none;
-      padding: 14px;
-      color: var(--muted);
+      padding: 0 14px 14px;
     }
 
-    .acc-item.open .acc-body{
-      display: block;
-    }
+    .acc-item.open .acc-body{ display: block; }
 
     .talent{
       padding: 14px;
-      background: var(--panel-light);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      padding-right: 48px;
       margin-bottom: 12px;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
+      position: relative;
     }
 
-    .talent:hover{
-      background: #222222;
-      border-color: var(--accent);
-      transform: translateX(4px);
-    }
+    .talent:hover{ transform: translateX(3px); }
 
     .talent strong{
       font-family: 'Cinzel', serif;
       color: var(--accent);
-      font-size: 1.05rem;
+      font-size: 1.03rem;
       display: block;
       margin-bottom: 6px;
     }
 
     .btn-characters{
       display: inline-block;
-      margin-top: 24px;
-      padding: 12px 24px;
+      margin-top: 20px;
+      padding: 12px 22px;
       background: linear-gradient(135deg, var(--accent-dark), var(--accent));
-      color: #000;
+      color: #0d0d0d;
       font-family: 'Cinzel', serif;
       font-weight: 700;
       border-radius: var(--radius);
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 6px 18px rgba(201,168,107,.25);
     }
 
     .btn-characters:hover{
-      background: linear-gradient(135deg, var(--accent), var(--accent-bright));
       transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(201,168,107,.32);
     }
 
     footer{
-      padding: 20px 30px;
-      border-top: 2px solid var(--border);
+      padding: clamp(14px, 2vw, 20px) clamp(16px, 2vw, 30px);
+      border-top: 1px solid var(--border);
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
+      gap: 10px;
       align-items: center;
-      background: var(--panel);
+      background: rgba(13,13,13,.95);
     }
 
     .nav-link{
@@ -349,26 +383,45 @@
       border: 1px solid var(--border);
       background: var(--panel-light);
       font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      transition: all 0.3s ease;
+      font-size: 0.88rem;
+      transition: all 0.25s ease;
     }
 
     .nav-link:hover{
       background: var(--accent);
-      color: #000;
+      color: #121212;
     }
 
     hr{
       border: none;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      margin: 20px 0;
+      margin: 18px 0;
+    }
+
+    :focus-visible{
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
     }
 
     @media (max-width: 1200px){
-      .container{grid-template-columns: 1fr;}
+      .container{ grid-template-columns: 1fr 1fr; }
     }
-  </style>
+
+    @media (max-width: 900px){
+      header{ flex-direction: column; text-align: center; }
+      .container{ grid-template-columns: 1fr; }
+      .item h3{ font-size: 1rem; }
+    }
+
+    @media (max-width: 560px){
+      body{ padding: 10px; }
+      .item{ padding-right: 70px; }
+      .move-btn, .delete-btn{ width: 22px; height: 22px; }
+      .tag{ display: inline-flex; margin: 6px 0 0; }
+      footer{ justify-content: center; }
+    }
+</style>
 </head>
 <body>
   <div class="page">
@@ -679,6 +732,28 @@
       item.classList.toggle('open');
     }
 
+    function ensureAccDeleteButton(item) {
+      if (!item.querySelector('.acc-delete-btn')) {
+        const btn = document.createElement('button');
+        btn.className = 'acc-delete-btn';
+        btn.type = 'button';
+        btn.textContent = '×';
+        btn.onclick = function() { deleteAccItem(this); };
+        item.insertBefore(btn, item.firstChild);
+      }
+    }
+
+    function ensureTalentDeleteButton(item) {
+      if (!item.querySelector('.talent-delete-btn')) {
+        const btn = document.createElement('button');
+        btn.className = 'talent-delete-btn';
+        btn.type = 'button';
+        btn.textContent = '×';
+        btn.onclick = function() { deleteTalent(this); };
+        item.insertBefore(btn, item.firstChild);
+      }
+    }
+
     // Удаление аккордеона (Детали/Ритуалы)
     function deleteAccItem(btn) {
       if (confirm('Удалить этот элемент?')) {
@@ -758,10 +833,9 @@
     function moveToRuby(btn) {
       const item = btn.parentElement;
       const ruby = document.getElementById('ruby');
-      const inventory = document.getElementById('inventory');
       const placeholder = ruby.querySelector('p');
       
-      if (placeholder && placeholder.textContent.includes('Пусто')) {
+      if (placeholder) {
         placeholder.remove();
       }
       
@@ -901,7 +975,9 @@
       document.querySelectorAll('#ruby .item').forEach(item => {
         data.ruby.push({
           id: item.dataset.id,
-          html: item.innerHTML
+          html: item.innerHTML,
+          title: item.querySelector('h3') ? item.querySelector('h3').innerHTML : '',
+          description: item.querySelector('p') ? item.querySelector('p').innerHTML : ''
         });
       });
       
@@ -944,6 +1020,11 @@
       if (!saved) return;
       
       const data = JSON.parse(saved);
+      data.inventory = Array.isArray(data.inventory) ? data.inventory : [];
+      data.ruby = Array.isArray(data.ruby) ? data.ruby : [];
+      data.details = Array.isArray(data.details) ? data.details : [];
+      data.rituals = Array.isArray(data.rituals) ? data.rituals : [];
+      data.talents = Array.isArray(data.talents) ? data.talents : [];
       
       // Загрузка инвентаря
       const inventory = document.getElementById('inventory');
@@ -970,12 +1051,42 @@
       const placeholder = ruby.querySelector('p');
       
       data.ruby.forEach(item => {
-        const itemEl = document.querySelector(`[data-id="${item.id}"]`);
-        if (itemEl) {
-          const btn = itemEl.querySelector('.move-btn');
-          btn.textContent = '←';
-          btn.onclick = function() { moveToInventory(this); };
-          ruby.appendChild(itemEl);
+        const existing = document.querySelector(`[data-id="${item.id}"]`);
+        let htmlToUse = item.html || '';
+
+        if (existing) {
+          const existingDesc = existing.querySelector('p');
+          if (!htmlToUse && existing.innerHTML) {
+            htmlToUse = existing.innerHTML;
+          } else if (!/<p[\s>]/i.test(htmlToUse) && existingDesc) {
+            htmlToUse += `<p>${existingDesc.innerHTML}</p>`;
+          }
+          existing.remove();
+        }
+
+        if (!/<p[\s>]/i.test(htmlToUse) && item.description) {
+          htmlToUse += `<p>${item.description}</p>`;
+        }
+
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.dataset.id = item.id;
+        div.innerHTML = htmlToUse;
+        ruby.appendChild(div);
+
+        div.querySelectorAll('[contenteditable]').forEach(el => {
+          el.addEventListener('blur', saveAllData);
+        });
+
+        const deleteBtn = div.querySelector('.delete-btn');
+        if (deleteBtn) {
+          deleteBtn.onclick = function() { deleteItem(this); };
+        }
+
+        const moveBtn = div.querySelector('.move-btn');
+        if (moveBtn) {
+          moveBtn.textContent = '←';
+          moveBtn.onclick = function() { moveToInventory(this); };
         }
       });
       
@@ -990,6 +1101,7 @@
         div.className = 'acc-item';
         div.dataset.id = item.id;
         div.innerHTML = item.html;
+        ensureAccDeleteButton(div);
         details.appendChild(div);
         
         // Восстанавливаем обработчики
@@ -1007,6 +1119,7 @@
         div.className = 'acc-item';
         div.dataset.id = item.id;
         div.innerHTML = item.html;
+        ensureAccDeleteButton(div);
         rituals.appendChild(div);
         
         // Восстанавливаем обработчики
@@ -1024,6 +1137,7 @@
         div.className = 'talent';
         div.dataset.id = item.id;
         div.innerHTML = item.html;
+        ensureTalentDeleteButton(div);
         talents.appendChild(div);
         
         // Восстанавливаем обработчики
@@ -1052,6 +1166,11 @@
       document.querySelectorAll('[contenteditable]').forEach(el => {
         el.addEventListener('blur', saveAllData);
       });
+
+      document.querySelectorAll('#details .acc-item, #rituals .acc-item').forEach(ensureAccDeleteButton);
+      document.querySelectorAll('#talents .talent').forEach(ensureTalentDeleteButton);
+
+      checkRubyPlaceholder();
     });
   </script>
 </body>
