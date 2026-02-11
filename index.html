@@ -122,7 +122,8 @@
     .add-btn,
     .move-btn,
     .delete-btn,
-    .acc-delete-btn{
+    .acc-delete-btn,
+    .talent-delete-btn{
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -222,12 +223,14 @@
 
     .move-btn,
     .delete-btn,
-    .acc-delete-btn{
+    .acc-delete-btn,
+    .talent-delete-btn{
       position: absolute;
       top: 10px;
       width: 24px;
       height: 24px;
       font-size: .95rem;
+      line-height: 1;
     }
 
     .move-btn{
@@ -240,17 +243,31 @@
     .move-btn:hover{ background: var(--accent-bright); transform: scale(1.12); }
 
     .delete-btn,
-    .acc-delete-btn{
+    .acc-delete-btn,
+    .talent-delete-btn{
       right: 40px;
-      background: #be4141;
+      background: linear-gradient(150deg, #d45151, #a32d2d);
       color: #fff;
-      box-shadow: 0 2px 6px rgba(201, 68, 68, 0.32);
+      box-shadow: 0 6px 14px rgba(201, 68, 68, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
     }
 
     .acc-delete-btn{ top: 12px; right: 12px; }
 
+    .talent-delete-btn{ top: 12px; right: 12px; }
+
     .delete-btn:hover,
-    .acc-delete-btn:hover{ background: #df5757; transform: scale(1.12); }
+    .acc-delete-btn:hover,
+    .talent-delete-btn:hover{
+      background: linear-gradient(150deg, #ea5f5f, #b33434);
+      transform: translateY(-1px) scale(1.08);
+      box-shadow: 0 8px 16px rgba(201, 68, 68, 0.44);
+    }
+
+    .delete-btn:active,
+    .acc-delete-btn:active,
+    .talent-delete-btn:active{
+      transform: scale(0.96);
+    }
 
     .item h3{
       font-family: 'Cinzel', serif;
@@ -312,8 +329,10 @@
 
     .talent{
       padding: 14px;
+      padding-right: 48px;
       margin-bottom: 12px;
       transition: all 0.25s ease;
+      position: relative;
     }
 
     .talent:hover{ transform: translateX(3px); }
@@ -713,6 +732,28 @@
       item.classList.toggle('open');
     }
 
+    function ensureAccDeleteButton(item) {
+      if (!item.querySelector('.acc-delete-btn')) {
+        const btn = document.createElement('button');
+        btn.className = 'acc-delete-btn';
+        btn.type = 'button';
+        btn.textContent = '×';
+        btn.onclick = function() { deleteAccItem(this); };
+        item.insertBefore(btn, item.firstChild);
+      }
+    }
+
+    function ensureTalentDeleteButton(item) {
+      if (!item.querySelector('.talent-delete-btn')) {
+        const btn = document.createElement('button');
+        btn.className = 'talent-delete-btn';
+        btn.type = 'button';
+        btn.textContent = '×';
+        btn.onclick = function() { deleteTalent(this); };
+        item.insertBefore(btn, item.firstChild);
+      }
+    }
+
     // Удаление аккордеона (Детали/Ритуалы)
     function deleteAccItem(btn) {
       if (confirm('Удалить этот элемент?')) {
@@ -792,10 +833,9 @@
     function moveToRuby(btn) {
       const item = btn.parentElement;
       const ruby = document.getElementById('ruby');
-      const inventory = document.getElementById('inventory');
       const placeholder = ruby.querySelector('p');
       
-      if (placeholder && placeholder.textContent.includes('Пусто')) {
+      if (placeholder) {
         placeholder.remove();
       }
       
@@ -1010,6 +1050,27 @@
           btn.textContent = '←';
           btn.onclick = function() { moveToInventory(this); };
           ruby.appendChild(itemEl);
+        } else {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.dataset.id = item.id;
+          div.innerHTML = item.html;
+          ruby.appendChild(div);
+
+          div.querySelectorAll('[contenteditable]').forEach(el => {
+            el.addEventListener('blur', saveAllData);
+          });
+
+          const deleteBtn = div.querySelector('.delete-btn');
+          if (deleteBtn) {
+            deleteBtn.onclick = function() { deleteItem(this); };
+          }
+
+          const moveBtn = div.querySelector('.move-btn');
+          if (moveBtn) {
+            moveBtn.textContent = '←';
+            moveBtn.onclick = function() { moveToInventory(this); };
+          }
         }
       });
       
@@ -1024,6 +1085,7 @@
         div.className = 'acc-item';
         div.dataset.id = item.id;
         div.innerHTML = item.html;
+        ensureAccDeleteButton(div);
         details.appendChild(div);
         
         // Восстанавливаем обработчики
@@ -1041,6 +1103,7 @@
         div.className = 'acc-item';
         div.dataset.id = item.id;
         div.innerHTML = item.html;
+        ensureAccDeleteButton(div);
         rituals.appendChild(div);
         
         // Восстанавливаем обработчики
@@ -1058,6 +1121,7 @@
         div.className = 'talent';
         div.dataset.id = item.id;
         div.innerHTML = item.html;
+        ensureTalentDeleteButton(div);
         talents.appendChild(div);
         
         // Восстанавливаем обработчики
@@ -1086,6 +1150,11 @@
       document.querySelectorAll('[contenteditable]').forEach(el => {
         el.addEventListener('blur', saveAllData);
       });
+
+      document.querySelectorAll('#details .acc-item, #rituals .acc-item').forEach(ensureAccDeleteButton);
+      document.querySelectorAll('#talents .talent').forEach(ensureTalentDeleteButton);
+
+      checkRubyPlaceholder();
     });
   </script>
 </body>
