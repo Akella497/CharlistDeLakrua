@@ -754,6 +754,24 @@
       }
     }
 
+
+    function ensureItemContent(itemEl, savedItem) {
+      if (!itemEl || !savedItem) return;
+
+      if (!itemEl.querySelector('h3') && savedItem.titleHtml) {
+        const h3 = document.createElement('h3');
+        h3.innerHTML = savedItem.titleHtml;
+        itemEl.appendChild(h3);
+      }
+
+      const hasDescription = !!itemEl.querySelector('p');
+      if (!hasDescription && savedItem.descriptionHtml) {
+        const p = document.createElement('p');
+        p.innerHTML = savedItem.descriptionHtml;
+        itemEl.appendChild(p);
+      }
+    }
+
     // Удаление аккордеона (Детали/Ритуалы)
     function deleteAccItem(btn) {
       if (confirm('Удалить этот элемент?')) {
@@ -967,7 +985,9 @@
       document.querySelectorAll('#inventory .item').forEach(item => {
         data.inventory.push({
           id: item.dataset.id,
-          html: item.innerHTML
+          html: item.innerHTML,
+          titleHtml: item.querySelector('h3') ? item.querySelector('h3').innerHTML : '',
+          descriptionHtml: item.querySelector('p') ? item.querySelector('p').innerHTML : ''
         });
       });
       
@@ -975,7 +995,9 @@
       document.querySelectorAll('#ruby .item').forEach(item => {
         data.ruby.push({
           id: item.dataset.id,
-          html: item.innerHTML
+          html: item.innerHTML,
+          titleHtml: item.querySelector('h3') ? item.querySelector('h3').innerHTML : '',
+          descriptionHtml: item.querySelector('p') ? item.querySelector('p').innerHTML : ''
         });
       });
       
@@ -1033,6 +1055,7 @@
           div.className = 'item';
           div.dataset.id = item.id;
           div.innerHTML = item.html;
+          ensureItemContent(div, item);
           inventory.appendChild(div);
           
           // Восстанавливаем обработчики
@@ -1058,6 +1081,7 @@
         div.className = 'item';
         div.dataset.id = item.id;
         div.innerHTML = item.html;
+        ensureItemContent(div, item);
         ruby.appendChild(div);
 
         div.querySelectorAll('[contenteditable]').forEach(el => {
